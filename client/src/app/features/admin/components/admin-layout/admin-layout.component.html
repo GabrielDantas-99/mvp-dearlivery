@@ -1,0 +1,63 @@
+<div class="flex min-h-screen w-full">
+  <div class="max-w-72 w-1/4 min-h-full">
+    <p-menu
+      [model]="items"
+      class="flex relative bg-ping-300 h-full w-full justify-center"
+      styleClass="w-full "
+    >
+      <ng-template #start>
+        <div class="flex items-center text-3xl h-16 font-semibold">
+          <span class="text-[--primary]">Dear</span>
+          <span class="text-slate-400">livery</span>
+        </div>
+      </ng-template>
+      <ng-template #submenuheader let-item>
+        <span class="text-primary font-bold">{{ item.label }}</span>
+      </ng-template>
+      <ng-template #item let-item>
+        <a pRipple class="flex items-center p-menu-item-link">
+          <span [class]="item.icon"></span>
+          <span class="ml-2">{{ item.label }}</span>
+          <p-badge *ngIf="item.badge" class="ml-auto" [value]="item.badge" />
+          <span
+            *ngIf="item.shortcut"
+            class="ml-auto border border-surface rounded bg-emphasis text-muted-color text-xs p-1"
+          >
+            {{ item.shortcut }}
+          </span>
+        </a>
+      </ng-template>
+      <ng-template class="bottom-0" #end>
+        <button
+          pRipple
+          class="relative overflow-hidden w-full border-0 bg-transparent flex items-center p-2 pl-4 hover:bg-surface-100 dark:hover:bg-surface-800 rounded-none cursor-pointer transition-colors duration-200 justify-between"
+        >
+          <div class="flex items-center gap-2">
+            <p-avatar
+              image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
+              class="mr-2"
+              shape="circle"
+            />
+            <span class="inline-flex flex-col">
+              <span class="font-bold">Amy Elsner</span>
+              <span class="text-sm">Admin</span>
+            </span>
+          </div>
+          <p-toggleswitch (click)="toggleDarkMode()">
+            <ng-template #handle let-checked="checked">
+              <i
+                [ngClass]="['!text-xs', 'pi', checked ? 'pi-sun' : 'pi-moon']"
+              ></i>
+            </ng-template>
+          </p-toggleswitch>
+        </button>
+      </ng-template>
+    </p-menu>
+  </div>
+  <div>
+    <div class="bg-white w-full h-16 flex items-center">
+      <p-breadcrumb class="max-w-full" [model]="breadcrumbs" [home]="home" />
+    </div>
+    <ng-content />
+  </div>
+</div>

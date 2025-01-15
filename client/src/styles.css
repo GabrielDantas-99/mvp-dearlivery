@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import url("https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400..800&display=swap");
+@import "primeicons/primeicons.css";
 
 @layer tailwind-base, primeng, tailwind-utilities;
 
@@ -10,6 +11,20 @@
 @layer tailwind-utilities {
   @tailwind components;
   @tailwind utilities;
+}
+
+:root {
+  --primary: #6366f1;
+  --primary-90: rgb(99, 102, 241, 90%);
+  --primary-75: rgb(99, 102, 241, 75%);
+  --primary-50: rgb(99, 102, 241, 50%);
+  --primary-20: rgb(99, 102, 241, 20%);
+  --primary-10: rgb(99, 102, 241, 10%);
+  --red: rgb(239 68 68 / 1);
+  --red-90: rgb(239 68 68 / 90%);
+  --muted: rgb(203 213 225);
+  --secondary: rgb(71 85 105 / 75%);
+  --box-shadow: #d9ddfc9f;
 }
 
 body {

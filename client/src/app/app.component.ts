@@ -2,9 +2,10 @@ import { Component, OnInit } from "@angular/core";
 import { ButtonModule } from "primeng/button";
 import { PrimeNG } from "primeng/config";
 import { Noir } from "./theme/mypreset";
+import { RouterOutlet } from "@angular/router";
 @Component({
   selector: "app-root",
-  imports: [ButtonModule],
+  imports: [ButtonModule, RouterOutlet],
   templateUrl: "app.component.html",
 })
 export class AppComponent implements OnInit {
@@ -25,11 +26,14 @@ export class AppComponent implements OnInit {
   }
 
   toggleDarkMode() {
-    const element = document.querySelector("html");
-    element.classList.toggle("my-app-dark");
+    toggleDarkMode();
   }
 
   ngOnInit() {
     this.primeng.ripple.set(true);
   }
+}
+export function toggleDarkMode() {
+  const element = document.querySelector("html");
+  element.classList.toggle("my-app-dark");
 }
