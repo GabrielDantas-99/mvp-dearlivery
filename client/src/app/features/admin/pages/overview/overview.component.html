@@ -1,3 +1,112 @@
-<app-admin-layout>
-  <p>overview works!</p>
+<app-admin-layout [breadcrumbs]="null">
+  <div class="my-4 flex items-center justify-between">
+    <div>
+      <h1 class="text-3xl leading-5 font-semibold opacity-80">
+        Olá, Gabriel Dantas
+      </h1>
+      <p class="opacity-50">Acompanhe o desempenho do seu negócio aqui!</p>
+    </div>
+    <div class="flex items-center gap-2">
+      <span>{{ date | todayTime }}</span>
+      <div class="rounded-full w-8 h-8 grid place-items-center mb-1">
+        <i class="pi pi-calendar text-xl"></i>
+      </div>
+    </div>
+  </div>
+  <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
+    <p-card class="md:col-span-2 lg:col-span-1">
+      <ng-template #title>
+        <div class="flex items-center justify-between">
+          <h1 class="text-xl">Produtos</h1>
+          <i class="pi pi-cart-arrow-down text-xl"></i>
+        </div>
+      </ng-template>
+      <div class="flex items-end gap-1">
+        <p class="m-0 text-3xl">28</p>
+        <span class="mb-0.5">Cadastrados</span>
+      </div>
+    </p-card>
+    <p-card class="md:col-span-2 lg:col-span-1">
+      <ng-template #title>
+        <div class="flex items-center justify-between">
+          <h1 class="text-xl">Categorias</h1>
+          <i class="pi pi-tags text-xl"></i>
+        </div>
+      </ng-template>
+      <div class="flex items-end gap-1">
+        <p class="m-0 text-3xl">5</p>
+        <span class="mb-0.5">Relacionadas</span>
+      </div>
+    </p-card>
+    <p-card class="md:col-span-2 lg:col-span-1">
+      <ng-template #title>
+        <div class="flex items-center justify-between">
+          <h1 class="text-xl">Pedidos</h1>
+          <i class="pi pi-box text-xl"></i>
+        </div>
+      </ng-template>
+      <div class="flex items-end gap-1">
+        <p class="m-0 text-3xl">121</p>
+        <span class="mb-0.5">Finalizados</span>
+      </div>
+    </p-card>
+    <p-card class="md:col-span-2 lg:col-span-1">
+      <ng-template #title>
+        <div class="flex items-center justify-between">
+          <h1 class="text-xl">Clientes</h1>
+          <i class="pi pi-users text-xl"></i>
+        </div>
+      </ng-template>
+      <div class="flex items-end gap-1">
+        <p class="m-0 text-3xl">56</p>
+        <span class="mb-0.5">Registrados</span>
+      </div>
+    </p-card>
+    <p-card class="col-span-4" header="Todos os Pedidos">
+      <p-table
+        *ngIf="orders$ | async as orders; else spinner"
+        [value]="orders"
+        [paginator]="true"
+        [rows]="5"
+        [tableStyle]="{ 'min-width': '50rem' }"
+        [rowsPerPageOptions]="[5, 10, 20]"
+      >
+        <ng-template #header>
+          <tr>
+            <th style="width: 25%">Cliente</th>
+            <th style="width: 25%">Data</th>
+            <th style="width: 25%">Status</th>
+            <th style="width: 25%">Total</th>
+          </tr>
+        </ng-template>
+        <ng-template #body let-order>
+          <tr>
+            <td>{{ order.clientName }}</td>
+            <td>{{ order.moment | dateTime }}</td>
+            <td>
+              <span
+                class="px-1.5 py-0.5 rounded-md flex items-center w-fit"
+                [ngClass]="[
+                  getOrderStatus(order.orderStatus).textColor,
+                  getOrderStatus(order.orderStatus).bgColor
+                ]"
+              >
+                {{ getOrderStatus(order.orderStatus).value }}
+              </span>
+            </td>
+            <td>{{ order.total | currencyBr }}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+      <ng-template class="w-full" #spinner>
+        <p-progress-spinner
+          class="flex items-center w-full my-8"
+          strokeWidth="8"
+          fill="transparent"
+          animationDuration=".5s"
+          [style]="{ width: '50px', height: '50px' }"
+        />
+      </ng-template>
+    </p-card>
+  </div>
 </app-admin-layout>

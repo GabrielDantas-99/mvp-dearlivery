@@ -6,7 +6,7 @@
       styleClass="w-full "
     >
       <ng-template #start>
-        <div class="flex items-center text-3xl h-16 font-semibold">
+        <div class="flex items-center text-3xl px-4 h-16 font-semibold">
           <span class="text-[--primary]">Dear</span>
           <span class="text-slate-400">livery</span>
         </div>
@@ -15,7 +15,11 @@
         <span class="text-primary font-bold">{{ item.label }}</span>
       </ng-template>
       <ng-template #item let-item>
-        <a pRipple class="flex items-center p-menu-item-link">
+        <a
+          [routerLink]="item.routerLink"
+          pRipple
+          class="flex items-center p-menu-item-link"
+        >
           <span [class]="item.icon"></span>
           <span class="ml-2">{{ item.label }}</span>
           <p-badge *ngIf="item.badge" class="ml-auto" [value]="item.badge" />
@@ -54,10 +58,12 @@
       </ng-template>
     </p-menu>
   </div>
-  <div>
-    <div class="bg-white w-full h-16 flex items-center">
+  <div class="w-full">
+    <div *ngIf="breadcrumbs !== null" class="w-full h-16 flex items-center">
       <p-breadcrumb class="max-w-full" [model]="breadcrumbs" [home]="home" />
     </div>
-    <ng-content />
+    <div class="p-4">
+      <ng-content />
+    </div>
   </div>
 </div>

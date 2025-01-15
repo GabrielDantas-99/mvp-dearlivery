@@ -8,23 +8,28 @@ export const MENU_ITEMS = [
       {
         label: "Visão Geral",
         icon: "pi pi-chart-bar",
+        routerLink: "/overview",
         // shortcut: "⌘+N",
       },
       {
         label: "Produtos",
         icon: "pi pi-shop",
+        routerLink: "/products",
       },
       {
         label: "Categorias",
         icon: "pi pi-tags",
+        routerLink: "/categories",
       },
       {
         label: "Pedidos",
         icon: "pi pi-shopping-bag",
+        routerLink: "/orders",
       },
       {
         label: "Clientes",
         icon: "pi pi-users",
+        routerLink: "/clients",
       },
     ],
   },
