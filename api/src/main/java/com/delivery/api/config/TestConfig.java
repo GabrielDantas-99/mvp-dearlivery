@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Profile;
 import com.delivery.api.entities.domain.Category;
 import com.delivery.api.entities.domain.Order;
 import com.delivery.api.entities.domain.OrderItem;
+import com.delivery.api.entities.domain.Payment;
 import com.delivery.api.entities.domain.Product;
 import com.delivery.api.entities.enums.OrderStatus;
 import com.delivery.api.repositories.CategoryRepository;
@@ -85,6 +86,11 @@ public class TestConfig implements CommandLineRunner {
     OrderItem oi6 = new OrderItem(o4, p1, 2, p1.getPrice());
     OrderItem oi7 = new OrderItem(o5, p7, 2, p7.getPrice());
     orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4, oi5, oi6, oi7));
+
+    Payment pay1 = new Payment(null, Instant.parse("2025-01-06T20:01:17Z"), o1);
+    o1.setPayment(pay1);
+
+    orderRepository.save(o1);
   }
 
 }
