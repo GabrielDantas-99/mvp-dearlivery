@@ -3,14 +3,11 @@ package com.delivery.api.services;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.delivery.api.entities.domain.Order;
 import com.delivery.api.entities.enums.OrderStatus;
 import com.delivery.api.repositories.OrderRepository;
-import com.delivery.api.services.exceptions.DatabaseException;
 import com.delivery.api.services.exceptions.ResourceNotFoundException;
 
 import jakarta.persistence.EntityNotFoundException;
