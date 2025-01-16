@@ -2,11 +2,14 @@ package com.delivery.api.services;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import com.delivery.api.entities.domain.Category;
 import com.delivery.api.entities.domain.Product;
 import com.delivery.api.repositories.ProductRepository;
 import com.delivery.api.services.exceptions.DatabaseException;
@@ -38,7 +41,7 @@ public class ProductService {
   public Product update(Product productDto) {
     try {
       Product entity = productRepository.getReferenceById(productDto.getId());
-      updateData(entity, productDto);
+      updateProduct(entity, productDto);
       return productRepository.save(entity);
     } catch (EntityNotFoundException e) {
       throw new ResourceNotFoundException(productDto.getId());
@@ -55,11 +58,13 @@ public class ProductService {
     }
   }
 
-  private void updateData(Product oldObj, Product newObj) {
+  private void updateProduct(Product oldObj, Product newObj) {
+    Set<Category> newCategories = newObj.getCategories().stream().collect(Collectors.toSet());
     oldObj.setTitle(newObj.getTitle());
     oldObj.setDescription(newObj.getDescription());
     oldObj.setImgUrl(newObj.getImgUrl());
     oldObj.setInStock(newObj.getInStock());
+    oldObj.getCategories().addAll(newCategories);
   }
 
 }
