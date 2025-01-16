@@ -1,3 +1,86 @@
 <app-store-layout>
-  <p>catalog works!</p>
+  <div class="flex flex-col space-y-4 pb-8">
+    <img class="bg-red-200" src="/banner.png" alt="banner-principal" />
+    <div class="shop-by-category">
+      <div class="flex items-center justify-between px-4">
+        <h2 class="text-xl font-medium">Comprar por Categoria</h2>
+        <button
+          class="hover:bg-slate-100 justify-between rounded-md pr-2 pl-4 py-2 flex items-center text-md text-slate-400 font-medium transition ease-in-out"
+        >
+          Ver Tudo
+        </button>
+      </div>
+      <div
+        class="flex items-center gap-2 px-4 py-2 overflow-x-scroll [&::-webkit-scrollbar]:hidden"
+      >
+        <p-button
+          (click)="activeCategory = 0"
+          [outlined]="activeCategory !== 0"
+        >
+          <span
+            class="whitespace-nowrap text-md text-center leading-5 font-medium"
+          >
+            Todas
+          </span>
+        </p-button>
+        <p-button
+          (click)="activeCategory = category.id"
+          *ngFor="let category of categories"
+          [outlined]="activeCategory !== category.id"
+        >
+          <span
+            class="whitespace-nowrap text-md text-center leading-5 font-medium"
+          >
+            {{ category.name }}
+          </span>
+        </p-button>
+      </div>
+    </div>
+    <!-- end of shop-by-category -->
+    <!-- start of product list -->
+    <div class="px-4">
+      <h1 class="text-xl font-medium">Todos os Produtos</h1>
+      <div class="grid grid-cols-1 mt-4 gap-2">
+        <p-panel
+          class="h-full row-span-1 relative"
+          *ngFor="let product of products; index as i"
+        >
+          <div class="flex items-center gap-1 absolute top-2 left-2">
+            <p-chip
+              class="leading-4"
+              label="{{ getCategoryLabel(product.categories) }}"
+            />
+          </div>
+          <p-button
+            class="absolute top-2 right-2"
+            icon="pi pi-heart"
+            outlined="true"
+            rounded="true"
+          />
+          <img
+            class="object-contain w-72 h-72 mx-auto"
+            src="{{ product.imgUrl }}"
+            alt="Imagem {{ product.title }}"
+          />
+          <div class="flex flex-col space-y-2">
+            <h2 class="text-lg font-medium truncate">
+              {{ product.title }}
+            </h2>
+            <p-rating [(ngModel)]="rating[i]" [readonly]="true" />
+            <div class="flex items-center gap-2 text-2xl">
+              <span class="line-through text-opacity-80">{{
+                product.price + 10 | currencyBr
+              }}</span>
+              <span class="font-medium">{{ product.price | currencyBr }}</span>
+            </div>
+          </div>
+          <p-button
+            label="Adicionar ao Carrinho"
+            icon="pi pi-cart-plus"
+            class="btn-cart !flex !items-center mt-4"
+          />
+        </p-panel>
+      </div>
+    </div>
+  </div>
 </app-store-layout>

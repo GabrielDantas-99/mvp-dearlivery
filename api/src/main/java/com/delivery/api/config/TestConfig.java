@@ -49,32 +49,47 @@ public class TestConfig implements CommandLineRunner {
     categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3, cat4));
 
     // TODO Auto-generated method stub
-    Product p1 = new Product(null, "Rede de Dormir Solteiro", "Rede de algodão 100% com design tradicional", null, 20,
+    Product p1 = new Product(null, "Rede de Dormir Solteiro", "Rede de algodão 100% com design tradicional",
+        "https://m.media-amazon.com/images/I/51OcLQzADOL._AC_UL320_.jpg", 20,
         129.00);
-    Product p2 = new Product(null, "Rede de Dormir Casal", "Rede extra-larga para maior conforto", null, 15, 189.90);
-    Product p3 = new Product(null, "Manta de Algodão", "Manta leve e macia, ideal para climas frios", null, 30, 89.10);
-    Product p4 = new Product(null, "Jogo de Lençóis Queen", "Lençóis 300 fios com fronha e elástico", null, 25, 98.00);
-    Product p5 = new Product(null, "Toalha de Banho Luxo", "Toalha felpuda de alta absorção", null, 40, 74.90);
-    Product p6 = new Product(null, "Toalha de Mesa Retangular", "Toalha decorativa com estampas florais", null, 18,
+    Product p2 = new Product(null, "Rede de Dormir Casal", "Rede extra-larga para maior conforto",
+        "https://m.media-amazon.com/images/I/81g8Gqy+1WL._AC_UL320_.jpg", 15, 189.90);
+    Product p3 = new Product(null, "Manta de Algodão", "Manta leve e macia, ideal para climas frios",
+        "https://m.media-amazon.com/images/I/71pUdKHKpcL._AC_UL320_.jpg", 30, 89.10);
+    Product p4 = new Product(null, "Jogo de Lençóis Queen", "Lençóis 300 fios com fronha e elástico",
+        "https://m.media-amazon.com/images/I/51Mh+0H7fzL._AC_UL320_.jpg", 25, 98.00);
+    Product p5 = new Product(null, "Toalha de Banho Luxo", "Toalha felpuda de alta absorção",
+        "https://m.media-amazon.com/images/I/71jpfivGAlL._AC_UL320_.jpg", 40, 74.90);
+    Product p6 = new Product(null, "Toalha de Mesa Retangular", "Toalha decorativa com estampas florais",
+        "https://m.media-amazon.com/images/I/81fIOEQu3uL._AC_UL320_.jpg", 18,
         69.00);
-    Product p7 = new Product(null, "Extensor de Rede Universal", "Extensor ajustável para qualquer tipo de rede", null,
+    Product p7 = new Product(null, "Extensor de Rede Universal", "Extensor ajustável para qualquer tipo de rede",
+        "https://m.media-amazon.com/images/I/51WTGoIipeL._AC_UL320_.jpg",
         50, 45.00);
     Product p8 = new Product(null, "Redutor de Rede Infantil", "Redutor para redes, garantindo segurança para crianças",
-        null, 35, 40.00);
-    Product p9 = new Product(null, "Cobertor de Microfibra", "Cobertor ultraleve com toque suave", null, 22, 64.90);
+        "https://m.media-amazon.com/images/I/51OcLQzADOL._AC_UL320_.jpg", 35, 40.00);
+    Product p9 = new Product(null, "Cobertor de Microfibra", "Cobertor ultraleve com toque suave",
+        "https://m.media-amazon.com/images/I/51pkqKdqjnL._AC_UL320_.jpg", 22, 64.90);
     Product p10 = new Product(null, "Travesseiro Anatômico",
-        "Travesseiro com suporte cervical ideal para noites confortáveis", null, 28, 79.90);
+        "Travesseiro com suporte cervical ideal para noites confortáveis",
+        "https://m.media-amazon.com/images/I/61T9MO3ik6L._AC_UL320_.jpg", 28, 79.90);
     productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10));
 
     p1.getCategories().add(cat1);
     p2.getCategories().add(cat1);
     p3.getCategories().add(cat2);
+    p3.getCategories().add(cat4);
     p4.getCategories().add(cat3);
     p5.getCategories().add(cat3);
+    p5.getCategories().add(cat4);
+    p5.getCategories().add(cat1);
+    p5.getCategories().add(cat2);
     p6.getCategories().add(cat3);
     p7.getCategories().add(cat4);
+    p7.getCategories().add(cat1);
     p8.getCategories().add(cat4);
     p9.getCategories().add(cat3);
+    p9.getCategories().add(cat4);
     p10.getCategories().add(cat3);
 
     productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10));

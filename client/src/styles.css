@@ -26,6 +26,7 @@
   --muted: rgb(203 213 225);
   --secondary: rgb(71 85 105 / 75%);
   --box-shadow: #d9ddfc9f;
+  --my-rating-icon-active-color: #eab308;
 }
 
 body {
@@ -46,4 +47,8 @@ body {
 
 .p-breadcrumb-item-label {
   margin-bottom: -3px;
+}
+
+p-button.btn-cart button {
+  width: 100% !important;
 }

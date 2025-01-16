@@ -2,6 +2,7 @@ import {
   Component,
   EventEmitter,
   Input,
+  OnInit,
   Output,
   ViewChild,
 } from "@angular/core";
@@ -13,8 +14,7 @@ import { StyleClass } from "primeng/styleclass";
 import { Drawer } from "primeng/drawer";
 import { CategoryService } from "@core/services/category.service";
 import { Category } from "@core/interfaces/category";
-import { Observable } from "rxjs";
-import { AsyncPipe, NgFor } from "@angular/common";
+import { NgFor } from "@angular/common";
 
 @Component({
   selector: "app-store-drawer",
@@ -25,8 +25,8 @@ import { AsyncPipe, NgFor } from "@angular/common";
     AvatarModule,
     StyleClass,
     NgFor,
-    AsyncPipe,
   ],
+  providers: [CategoryService],
   templateUrl: "./store-drawer.component.html",
   styleUrl: "./store-drawer.component.css",
 })
@@ -34,12 +34,7 @@ export class StoreDrawerComponent {
   @ViewChild("drawerRef") drawerRef!: Drawer;
   @Input() visible: boolean = false;
   @Output() toggleDrawer = new EventEmitter();
-
-  categories: Observable<Category[]> = null;
-
-  constructor(private categoryService: CategoryService) {
-    this.categories = this.categoryService.findAll();
-  }
+  @Input() categories: Category[] = null;
 
   closeCallback(e): void {
     this.drawerRef.close(e);

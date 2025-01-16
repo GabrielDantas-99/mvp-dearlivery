@@ -1,5 +1,5 @@
-<div class="min-h-screen">
-  <p-toolbar>
+<div class="min-h-screen pt-20">
+  <p-toolbar class="fixed top-0 w-full z-50 h-20 drop-shadow-sm">
     <ng-template #start>
       <p-button
         icon="pi pi-bars text-xl"
@@ -21,6 +21,10 @@
       </p-button>
     </ng-template>
   </p-toolbar>
-  <app-store-drawer (toggleDrawer)="toggleDrawer($event)" [visible]="visible" />
+  <app-store-drawer
+    (toggleDrawer)="toggleDrawer($event)"
+    [visible]="visible"
+    [categories]="categories"
+  />
   <ng-content />
 </div>
