@@ -2,12 +2,12 @@ import { Routes } from "@angular/router";
 import { OverviewComponent } from "./features/admin/pages/overview/overview.component";
 import { ProductListComponent } from "./features/admin/pages/products/product-list/product-list.component";
 import { ProductFormComponent } from "@features/admin/pages/products/product-form/product-form.component";
+import { StoreCatalogComponent } from "@features/store/pages/store-catalog/store-catalog.component";
 
 export const routes: Routes = [
   {
     path: "",
-    pathMatch: "full",
-    redirectTo: "overview",
+    component: StoreCatalogComponent,
   },
   {
     path: "overview",

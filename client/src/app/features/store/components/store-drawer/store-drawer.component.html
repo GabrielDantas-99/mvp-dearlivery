@@ -1,0 +1,165 @@
+<p-drawer #drawerRef [(visible)]="visible">
+  <ng-template #headless>
+    <div class="flex flex-col h-full">
+      <div class="flex items-center justify-between px-6 pt-4 shrink-0">
+        <div class="flex items-center text-3xl px-4 h-16 font-semibold">
+          <span class="text-[--primary]">Dear</span>
+          <span class="text-slate-400">livery</span>
+        </div>
+        <span>
+          <p-button
+            type="button"
+            (click)="closeCallback($event)"
+            icon="pi pi-times"
+            rounded="true"
+            outlined="true"
+            styleClass="h-8 w-8"
+          ></p-button>
+        </span>
+      </div>
+      <div class="overflow-y-auto">
+        <ul class="list-none p-4 m-0">
+          <li>
+            <div
+              pRipple
+              pStyleClass="@next"
+              enterFromClass="hidden"
+              enterActiveClass="animate-slidedown"
+              leaveToClass="hidden"
+              leaveActiveClass="animate-slideup"
+              class="p-4 flex items-center justify-between text-surface-600 dark:text-surface-200 cursor-pointer p-ripple"
+            >
+              <span class="font-medium uppercase">Loja</span>
+              <i class="pi pi-chevron-down"></i>
+            </div>
+            <ul class="list-none p-0 m-0 overflow-hidden">
+              <li>
+                <a
+                  pRipple
+                  class="flex items-center cursor-pointer p-4 rounded-border text-surface-700 dark:text-surface-100 hover:bg-surface-100 dark:hover:bg-surface-700 duration-150 transition-colors p-ripple"
+                >
+                  <i class="pi pi-shop mr-2"></i>
+                  <span class="font-medium">Catálogo</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  pRipple
+                  pStyleClass="@next"
+                  enterFromClass="hidden"
+                  enterActiveClass="animate-slidedown"
+                  leaveToClass="hidden"
+                  leaveActiveClass="animate-slideup"
+                  class="flex items-center cursor-pointer p-4 rounded-border text-surface-700 dark:text-surface-100 hover:bg-surface-100 dark:hover:bg-surface-700 duration-150 transition-colors p-ripple"
+                >
+                  <i class="pi pi-tags mr-2"></i>
+                  <span class="font-medium">Categorias</span>
+                  <i class="pi pi-chevron-down ml-auto"></i>
+                </a>
+                <ul
+                  class="list-none py-0 pl-4 pr-0 m-0 hidden overflow-y-hidden transition-all duration-[400ms] ease-in-out"
+                >
+                  <li *ngFor="let cat of categories | async">
+                    <a
+                      pRipple
+                      class="flex items-center cursor-pointer p-4 rounded-border text-surface-700 dark:text-surface-100 hover:bg-surface-100 dark:hover:bg-surface-700 duration-150 transition-colors p-ripple"
+                    >
+                      <!-- TODO: Adicionar atributo de ícone para cada categoria -->
+                      <!-- <i class="pi pi-chart-line mr-2"></i> -->
+                      <span class="font-medium">{{ cat.name }}</span>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a
+                  pRipple
+                  class="flex items-center cursor-pointer p-4 rounded-border text-surface-700 dark:text-surface-100 hover:bg-surface-100 dark:hover:bg-surface-700 duration-150 transition-colors p-ripple"
+                >
+                  <i class="pi pi-gift mr-2"></i>
+                  <span class="font-medium">Promoções</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  pRipple
+                  class="flex items-center cursor-pointer p-4 rounded-border text-surface-700 dark:text-surface-100 hover:bg-surface-100 dark:hover:bg-surface-700 duration-150 transition-colors p-ripple"
+                >
+                  <i class="pi pi-sparkles mr-2"></i>
+                  <span class="font-medium">Mais Vendidos</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="list-none p-4 m-0">
+          <li>
+            <div
+              pRipple
+              pStyleClass="@next"
+              enterFromClass="hidden"
+              enterActiveClass="animate-slidedown"
+              leaveToClass="hidden"
+              leaveActiveClass="animate-slideup"
+              class="p-4 flex items-center justify-between text-surface-600 dark:text-surface-200 cursor-pointer p-ripple"
+            >
+              <span class="font-medium">Meu Perfil</span>
+              <i class="pi pi-chevron-down"></i>
+            </div>
+            <ul class="list-none p-0 m-0 overflow-hidden">
+              <li>
+                <a
+                  pRipple
+                  class="flex items-center cursor-pointer p-4 rounded-border text-surface-700 dark:text-surface-100 hover:bg-surface-100 dark:hover:bg-surface-700 duration-150 transition-colors p-ripple"
+                >
+                  <i class="pi pi-map-marker mr-2"></i>
+                  <span class="font-medium">Acompanhar Pedido</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  pRipple
+                  class="flex items-center cursor-pointer p-4 rounded-border text-surface-700 dark:text-surface-100 hover:bg-surface-100 dark:hover:bg-surface-700 duration-150 transition-colors p-ripple"
+                >
+                  <i class="pi pi-box mr-2"></i>
+                  <span class="font-medium">Meus Pedidos</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  pRipple
+                  class="flex items-center cursor-pointer p-4 rounded-border text-surface-700 dark:text-surface-100 hover:bg-surface-100 dark:hover:bg-surface-700 duration-150 transition-colors p-ripple"
+                >
+                  <i class="pi pi-comments mr-2"></i>
+                  <span class="font-medium">Avaliações</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  pRipple
+                  class="flex items-center cursor-pointer p-4 rounded-border text-surface-700 dark:text-surface-100 hover:bg-surface-100 dark:hover:bg-surface-700 duration-150 transition-colors p-ripple"
+                >
+                  <i class="pi pi-user mr-2"></i>
+                  <span class="font-medium">Meus Dados</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="mt-auto">
+        <hr class="mb-4 mx-4 border-t border-0 border-surface" />
+        <a
+          pRipple
+          class="m-4 flex items-center cursor-pointer p-4 gap-2 rounded-border text-surface-700 dark:text-surface-100 hover:bg-surface-100 dark:hover:bg-surface-700 duration-150 transition-colors p-ripple"
+        >
+          <p-avatar
+            image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
+            shape="circle"
+          />
+          <span class="font-bold">Amy Elsner</span>
+        </a>
+      </div>
+    </div>
+  </ng-template>
+</p-drawer>
