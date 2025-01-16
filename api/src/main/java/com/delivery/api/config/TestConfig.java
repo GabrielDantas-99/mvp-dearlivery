@@ -1,5 +1,6 @@
 package com.delivery.api.config;
 
+import java.time.Instant;
 import java.util.Arrays;
 
 import org.springframework.boot.CommandLineRunner;
@@ -7,8 +8,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import com.delivery.api.entities.domain.Category;
+import com.delivery.api.entities.domain.Order;
 import com.delivery.api.entities.domain.Product;
+import com.delivery.api.entities.enums.OrderStatus;
 import com.delivery.api.repositories.CategoryRepository;
+import com.delivery.api.repositories.OrderRepository;
 import com.delivery.api.repositories.ProductRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -20,6 +24,7 @@ public class TestConfig implements CommandLineRunner {
 
   private final ProductRepository productRepository;
   private final CategoryRepository categoryRepository;
+  private final OrderRepository orderRepository;
 
   @Override
   public void run(String... args) throws Exception {
@@ -59,6 +64,13 @@ public class TestConfig implements CommandLineRunner {
     p10.getCategories().add(cat3);
 
     productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10));
+
+    Order o1 = new Order(null, Instant.parse("2025-01-06T19:53:17Z"), OrderStatus.PAID.getCode());
+    Order o2 = new Order(null, Instant.parse("2024-12-29T09:53:27Z"), OrderStatus.WAITING_PAYMENT.getCode());
+    Order o3 = new Order(null, Instant.parse("2024-12-29T11:14:37Z"), OrderStatus.CANCELED.getCode());
+    Order o4 = new Order(null, Instant.parse("2024-12-27T10:10:47Z"), OrderStatus.DELIVERED.getCode());
+    Order o5 = new Order(null, Instant.parse("2024-12-27T09:51:57Z"), OrderStatus.SHIPPED.getCode());
+    orderRepository.saveAll(Arrays.asList(o1, o2, o3, o4, o5));
   }
 
 }
