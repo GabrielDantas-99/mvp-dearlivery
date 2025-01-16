@@ -29,7 +29,7 @@ interface UploadEvent {
 }
 
 interface ProductForm {
-  name: FormControl<string>;
+  title: FormControl<string>;
   description: FormControl<string>;
   price: FormControl<number>;
   inStock: FormControl<number>;
@@ -84,7 +84,7 @@ export class ProductFormComponent {
 
   initForm() {
     this.productForm = new FormGroup({
-      name: new FormControl(null, [Validators.required]),
+      title: new FormControl(null, [Validators.required]),
       imgUrl: new FormControl(null),
       description: new FormControl(null, [
         Validators.required,

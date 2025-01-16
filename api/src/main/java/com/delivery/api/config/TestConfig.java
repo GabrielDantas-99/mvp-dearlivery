@@ -1,5 +1,11 @@
 package com.delivery.api.config;
 
+import static com.delivery.api.entities.enums.OrderStatus.CANCELED;
+import static com.delivery.api.entities.enums.OrderStatus.DELIVERED;
+import static com.delivery.api.entities.enums.OrderStatus.PAID;
+import static com.delivery.api.entities.enums.OrderStatus.SHIPPED;
+import static com.delivery.api.entities.enums.OrderStatus.WAITING_PAYMENT;
+
 import java.time.Instant;
 import java.util.Arrays;
 
@@ -12,11 +18,12 @@ import com.delivery.api.entities.domain.Order;
 import com.delivery.api.entities.domain.OrderItem;
 import com.delivery.api.entities.domain.Payment;
 import com.delivery.api.entities.domain.Product;
-import com.delivery.api.entities.enums.OrderStatus;
+import com.delivery.api.entities.domain.User;
 import com.delivery.api.repositories.CategoryRepository;
 import com.delivery.api.repositories.OrderItemRepository;
 import com.delivery.api.repositories.OrderRepository;
 import com.delivery.api.repositories.ProductRepository;
+import com.delivery.api.repositories.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -29,6 +36,7 @@ public class TestConfig implements CommandLineRunner {
   private final CategoryRepository categoryRepository;
   private final OrderRepository orderRepository;
   private final OrderItemRepository orderItemRepository;
+  private final UserRepository userRepository;
 
   @Override
   public void run(String... args) throws Exception {
@@ -71,11 +79,18 @@ public class TestConfig implements CommandLineRunner {
 
     productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10));
 
-    Order o1 = new Order(null, Instant.parse("2025-01-06T19:53:17Z"), OrderStatus.PAID);
-    Order o2 = new Order(null, Instant.parse("2024-12-29T09:53:27Z"), OrderStatus.WAITING_PAYMENT);
-    Order o3 = new Order(null, Instant.parse("2024-12-29T11:14:37Z"), OrderStatus.CANCELED);
-    Order o4 = new Order(null, Instant.parse("2024-12-27T10:10:47Z"), OrderStatus.DELIVERED);
-    Order o5 = new Order(null, Instant.parse("2024-12-27T09:51:57Z"), OrderStatus.SHIPPED);
+    User u1 = new User(null, "Benedita Malu Clarice da Conceição", "maria@gmail.com", "(91) 99379-7980",
+        "186.425.996-50", "123456");
+    User u2 = new User(null, "Leonardo Enrico Nelson da Cunha", "alex@gmail.com", "(63) 98484-0855", "650.020.239-24",
+        "123456");
+
+    Order o1 = new Order(null, Instant.parse("2025-01-06T19:53:17Z"), PAID, u1);
+    Order o2 = new Order(null, Instant.parse("2024-12-29T09:53:27Z"), WAITING_PAYMENT, u2);
+    Order o3 = new Order(null, Instant.parse("2024-12-29T11:14:37Z"), CANCELED, u2);
+    Order o4 = new Order(null, Instant.parse("2024-12-27T10:10:47Z"), DELIVERED, u1);
+    Order o5 = new Order(null, Instant.parse("2024-12-27T09:51:57Z"), SHIPPED, u1);
+
+    userRepository.saveAll(Arrays.asList(u1, u2));
     orderRepository.saveAll(Arrays.asList(o1, o2, o3, o4, o5));
 
     OrderItem oi1 = new OrderItem(o1, p1, 2, p1.getPrice());

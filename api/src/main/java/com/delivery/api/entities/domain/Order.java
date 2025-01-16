@@ -12,6 +12,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
@@ -39,6 +41,12 @@ public class Order implements Serializable {
   private Integer orderStatus;
 
   @Getter
+  @Setter
+  @ManyToOne
+  @JoinColumn(name = "client_id")
+  private User client;
+
+  @Getter
   @OneToMany(mappedBy = "id.order")
   private Set<OrderItem> items = new HashSet<>();
 
@@ -47,10 +55,11 @@ public class Order implements Serializable {
   @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
   private Payment payment;
 
-  public Order(Long id, Instant moment, OrderStatus orderStatus) {
+  public Order(Long id, Instant moment, OrderStatus orderStatus, User client) {
     super();
     this.id = id;
     this.moment = moment;
+    this.client = client;
     setOrderStatus(orderStatus);
   }
 

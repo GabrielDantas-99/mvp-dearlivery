@@ -1,7 +1,7 @@
 <app-admin-layout
   [breadcrumbs]="[
     { label: 'Produtos', routerLink: '/products' },
-    { label: formType === 'Cadastrar' ? 'Novo Produto' : product.name }
+    { label: formType === 'Cadastrar' ? 'Novo Produto' : product.title }
   ]"
 >
   <p-toast />
@@ -10,9 +10,10 @@
   >
     <div class="flex items-center justify-between">
       <h1 class="text-xl font-medium">
-        {{ formType === "Cadastrar" ? "Novo Produto" : product.name }}
+        {{ formType === "Cadastrar" ? "Novo Produto" : product.title }}
       </h1>
       <p-button
+        *ngIf="formType === 'Atualizar'"
         (click)="deleteConfirmationDialog()"
         label="Excluir"
         severity="danger"
@@ -47,12 +48,12 @@
         </ng-template>
       </p-fileupload>
       <div class="flex flex-col gap-0">
-        <label for="name">Título</label>
+        <label for="title">Título</label>
         <input
-          [(ngModel)]="product.name"
-          formControlName="name"
+          [(ngModel)]="product.title"
+          formControlName="title"
           pInputText
-          id="name"
+          id="title"
           [disabled]="isLoading"
         />
       </div>

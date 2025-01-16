@@ -6,11 +6,11 @@
       </h1>
       <p class="opacity-50">Acompanhe o desempenho do seu negócio aqui!</p>
     </div>
-    <div class="flex items-center gap-2">
+    <div
+      class="flex items-center gap-2 bg-[--my-datatable-row-hover-background] rounded-md px-4 py-2"
+    >
       <span>{{ date | todayTime }}</span>
-      <div class="rounded-full w-8 h-8 grid place-items-center mb-1">
-        <i class="pi pi-calendar text-xl"></i>
-      </div>
+      <i class="pi pi-calendar text-xl"></i>
     </div>
   </div>
   <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
@@ -81,7 +81,7 @@
         </ng-template>
         <ng-template #body let-order>
           <tr>
-            <td>{{ order.clientName }}</td>
+            <td>{{ order.client.name }}</td>
             <td>{{ order.moment | dateTime }}</td>
             <td>
               <span
