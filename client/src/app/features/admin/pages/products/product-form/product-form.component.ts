@@ -1,7 +1,6 @@
-import { Component, inject } from "@angular/core";
+import { Component } from "@angular/core";
 import { AdminLayoutComponent } from "../../../components/admin-layout/admin-layout.component";
 import {
-  FormBuilder,
   FormControl,
   FormGroup,
   FormsModule,
@@ -23,7 +22,6 @@ import { Editor } from "primeng/editor";
 import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import { ProductService } from "@core/services/product.service";
 import { ConfirmDialogModule } from "primeng/confirmdialog";
-import { delay, first } from "rxjs";
 
 interface UploadEvent {
   originalEvent: Event;
@@ -147,7 +145,7 @@ export class ProductFormComponent {
       return;
     }
     this.productService
-      .registerProduct({ ...this.productForm.value, storeId: 1 })
+      .create({ ...this.productForm.value, storeId: 1 })
       .subscribe({
         next: (res) => {
           this.messageService.add(
@@ -173,7 +171,7 @@ export class ProductFormComponent {
       return;
     }
     this.productService
-      .updateProduct({
+      .update({
         id: this.product.id,
         ...this.productForm.value,
         storeId: 1,

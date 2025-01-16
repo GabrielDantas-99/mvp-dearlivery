@@ -34,7 +34,7 @@ export class ProductListComponent {
   loading: boolean = true;
 
   constructor(private productService: ProductService) {
-    this.productService.findAllByStoreId().subscribe((value) => {
+    this.productService.findAll().subscribe((value) => {
       this.products = value;
       this.loading = false;
     });
