@@ -1,0 +1,68 @@
+<app-admin-layout [breadcrumbs]="[{ label: 'Produtos' }]">
+  <p-table
+    #dt2
+    *ngIf="products"
+    [value]="products"
+    [loading]="loading"
+    dataKey="id"
+    [rows]="10"
+    [rowsPerPageOptions]="[10, 25, 50]"
+    [globalFilterFields]="['name']"
+    [paginator]="true"
+    [tableStyle]="{ 'min-width': '60rem' }"
+  >
+    <ng-template #caption>
+      <div class="flex items-center justify-between">
+        <span class="text-xl font-bold">Gerenciar Produtos</span>
+        <div class="flex items-center gap-2">
+          <p-iconfield iconPosition="left" class="ml-auto">
+            <p-inputicon>
+              <i class="pi pi-search"></i>
+            </p-inputicon>
+            <input
+              pInputText
+              type="text"
+              (input)="dt2.filterGlobal(getTargetValue($event), 'contains')"
+              placeholder="Buscar produto"
+            />
+          </p-iconfield>
+          <p-button
+            [routerLink]="['product-form']"
+            label="Novo"
+            icon="pi pi-plus"
+          />
+        </div>
+      </div>
+    </ng-template>
+    <ng-template #header>
+      <tr>
+        <th>Imagem</th>
+        <th>Título</th>
+        <th>Categorias</th>
+        <th>Preço</th>
+        <th>Qntd.</th>
+      </tr>
+    </ng-template>
+    <ng-template #body let-product>
+      <tr
+        class="cursor-pointer hover:bg-[--my-datatable-row-hover-background]"
+        [routerLink]="['product-form', product.id]"
+      >
+        <td>
+          <img
+            src="https://primefaces.org/cdn/primeng/images/demo/product/bamboo-watch.jpg"
+            alt="Imagem do produto {{ product.name }}"
+            class="w-24 rounded"
+          />
+        </td>
+        <td>{{ product.name }}</td>
+        <td>{{ product.categories[0].name }}</td>
+        <td>{{ product.price | currencyBr }}</td>
+
+        <td>
+          <p-tag [value]="product.inStock" />
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</app-admin-layout>

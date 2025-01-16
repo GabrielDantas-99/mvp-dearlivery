@@ -58,8 +58,11 @@
       </ng-template>
     </p-menu>
   </div>
-  <div class="w-full">
-    <div *ngIf="breadcrumbs !== null" class="w-full h-16 flex items-center">
+  <div class="w-full pb-8">
+    <div
+      *ngIf="breadcrumbs !== null"
+      class="w-full bg-[--my-breadcrumb-background] border-b border-[--my-content-border-color] px-4 h-16 flex items-center"
+    >
       <p-breadcrumb class="max-w-full" [model]="breadcrumbs" [home]="home" />
     </div>
     <div class="p-4">

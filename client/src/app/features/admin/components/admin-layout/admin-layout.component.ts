@@ -11,7 +11,7 @@ import { ToggleSwitch } from "primeng/toggleswitch";
 import { FormsModule } from "@angular/forms";
 import { BreadcrumbModule } from "primeng/breadcrumb";
 import { MENU_ITEMS } from "../../const/menu-itens";
-import { ActivatedRoute, RouterLink, RouterLinkActive } from "@angular/router";
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: "app-admin-layout",
@@ -26,7 +26,6 @@ import { ActivatedRoute, RouterLink, RouterLinkActive } from "@angular/router";
     ToggleSwitch,
     NgClass,
     BreadcrumbModule,
-    RouterLinkActive,
     RouterLink,
   ],
   templateUrl: "./admin-layout.component.html",
