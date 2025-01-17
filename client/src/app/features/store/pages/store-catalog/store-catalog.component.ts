@@ -11,6 +11,7 @@ import { Chip } from "primeng/chip";
 import { Rating } from "primeng/rating";
 import { FormsModule } from "@angular/forms";
 import { CurrencyBrPipe } from "../../../../shared/pipes/currency-br.pipe";
+import { OrderService } from "@core/services/order.service";
 
 @Component({
   selector: "app-store-catalog",
@@ -36,12 +37,12 @@ export class StoreCatalogComponent {
 
   constructor(
     private categoryService: CategoryService,
-    private productService: ProductService
+    private productService: ProductService,
+    private orderService: OrderService
   ) {
     this.categoryService.findAll().subscribe((res) => (this.categories = res));
     this.productService.findAll().subscribe((res) => {
       this.products = res;
-      console.log(this.products);
       this.generateRandomRatings(res);
     });
   }
@@ -54,5 +55,9 @@ export class StoreCatalogComponent {
 
   getCategoryLabel(cats: Category[]) {
     return cats.length > 1 ? `${cats[0].name} +${cats.length}` : cats[0].name;
+  }
+
+  addToCart(product: Product) {
+    this.orderService.addToCart(product);
   }
 }

@@ -8,6 +8,7 @@ import { BadgeModule } from "primeng/badge";
 import { CategoryService } from "@core/services/category.service";
 import { Category } from "@core/interfaces/category";
 import { tap } from "rxjs";
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: "app-store-layout",
@@ -17,6 +18,7 @@ import { tap } from "rxjs";
     InputTextModule,
     StoreDrawerComponent,
     BadgeModule,
+    RouterLink,
   ],
   templateUrl: "./store-layout.component.html",
   styleUrl: "./store-layout.component.css",

@@ -49,6 +49,10 @@ body {
   margin-bottom: -3px;
 }
 
+.p-overlay-badge {
+  font-family: "Baloo Bhaijaan 2", "primeicons", serif !important;
+}
+
 p-button.btn-cart button {
   width: 100% !important;
 }

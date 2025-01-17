@@ -3,6 +3,7 @@ import { OverviewComponent } from "./features/admin/pages/overview/overview.comp
 import { ProductListComponent } from "./features/admin/pages/products/product-list/product-list.component";
 import { ProductFormComponent } from "@features/admin/pages/products/product-form/product-form.component";
 import { StoreCatalogComponent } from "@features/store/pages/store-catalog/store-catalog.component";
+import { MyCartComponent } from "@features/store/pages/my-cart/my-cart.component";
 
 export const routes: Routes = [
   {
@@ -24,5 +25,9 @@ export const routes: Routes = [
   {
     path: "products/product-form/:productId",
     component: ProductFormComponent,
+  },
+  {
+    path: "my-cart",
+    component: MyCartComponent,
   },
 ];

@@ -15,6 +15,7 @@ import { Drawer } from "primeng/drawer";
 import { CategoryService } from "@core/services/category.service";
 import { Category } from "@core/interfaces/category";
 import { NgFor } from "@angular/common";
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: "app-store-drawer",
@@ -25,6 +26,7 @@ import { NgFor } from "@angular/common";
     AvatarModule,
     StyleClass,
     NgFor,
+    RouterLink,
   ],
   providers: [CategoryService],
   templateUrl: "./store-drawer.component.html",

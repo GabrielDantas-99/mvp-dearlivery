@@ -1,7 +1,13 @@
+import { OrderItem } from "./order-item";
+import { Payment } from "./payment";
+import { User } from "./User";
+
 export interface Order {
   id?: number;
-  clientName: string;
-  total: number;
-  moment: string;
-  orderStatus: string;
+  client?: User;
+  total?: number;
+  moment?: string;
+  orderStatus?: string;
+  items?: OrderItem[];
+  payment?: Payment;
 }

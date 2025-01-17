@@ -1,5 +1,5 @@
-<div class="min-h-screen pt-20">
-  <p-toolbar class="fixed top-0 w-full z-50 h-20 drop-shadow-sm">
+<div class="min-h-screen pt-[90px]">
+  <p-toolbar class="fixed top-0 w-full z-50 h-[90px] drop-shadow-sm">
     <ng-template #start>
       <p-button
         icon="pi pi-bars text-xl"
@@ -16,7 +16,7 @@
       </div>
     </ng-template>
     <ng-template #end>
-      <p-button severity="secondary" [text]="true">
+      <p-button routerLink="/my-cart" severity="secondary" [text]="true">
         <i class="pi pi-cart-arrow-down text-2xl" pBadge value="2"></i>
       </p-button>
     </ng-template>
