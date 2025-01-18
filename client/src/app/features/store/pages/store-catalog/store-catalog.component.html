@@ -40,7 +40,7 @@
     <!-- start of product list -->
     <div class="px-4">
       <h1 class="text-xl font-medium">Todos os Produtos</h1>
-      <div class="grid grid-cols-1 mt-4 gap-2">
+      <div class="grid grid-cols-2 mt-4 gap-2">
         <p-panel
           class="h-full row-span-1 relative"
           *ngFor="let product of products; index as i"
@@ -58,27 +58,34 @@
             rounded="true"
           />
           <img
-            class="object-contain w-72 h-72 mx-auto"
+            class="object-contain w-72 h-56 mx-auto"
             src="{{ product.imgUrl }}"
             alt="Imagem {{ product.title }}"
           />
-          <div class="flex flex-col space-y-2">
-            <h2 class="text-lg font-medium truncate">
+          <div class="flex flex-col">
+            <h2 class="text-lg font-medium hyphens-auto leading-5">
               {{ product.title }}
             </h2>
-            <p-rating [(ngModel)]="rating[i]" [readonly]="true" />
-            <div class="flex items-center gap-2 text-2xl">
-              <span class="line-through text-opacity-80">{{
+            <div class="flex items-baseline gap-2">
+              <p-rating [(ngModel)]="rating[i]" [readonly]="true" />
+              <span class="text-[--my-rating-icon-active-color] mt-2"
+                >(10)</span
+              >
+            </div>
+            <div class="flex items-center flex-col xs:flex-row gap-1">
+              <span class="line-through text-opacity-80 text-sm">{{
                 product.price + 10 | currencyBr
               }}</span>
-              <span class="font-medium">{{ product.price | currencyBr }}</span>
+              <span class="font-medium text-2xl -mt-2 xs:mt-0">{{
+                product.price | currencyBr
+              }}</span>
             </div>
           </div>
           <p-button
             (onClick)="addToCart(product)"
             label="Adicionar ao Carrinho"
             icon="pi pi-cart-plus"
-            class="btn-cart !flex !items-center mt-4"
+            class="btn-cart !flex !items-center mt-2 leading-4"
           />
         </p-panel>
       </div>

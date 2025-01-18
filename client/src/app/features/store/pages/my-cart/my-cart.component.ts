@@ -11,6 +11,7 @@ import { InputNumber } from "primeng/inputnumber";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { OrderItem } from "@core/interfaces/order-item";
 import { MenuModule } from "primeng/menu";
+import { Product } from "@core/interfaces/product";
 
 @Component({
   selector: "app-my-cart",
@@ -44,9 +45,9 @@ export class MyCartComponent {
 
   constructor(private orderService: OrderService) {
     this.order = this.orderService.getCart();
-    this.order.items.forEach((item) => {
-      this.quantitiesPerItem.push(item.quantity);
-    });
+    // this.order.items.forEach((item) => {
+    //   this.quantitiesPerItem.push(item.quantity);
+    // });
   }
 
   saveOrder() {
@@ -66,11 +67,26 @@ export class MyCartComponent {
     this.orderService.saveCart(this.order);
   }
 
+  incriaseItem(product: Product) {
+    this.orderService.addToCart(product);
+  }
+
+  decrementFromCart(item: OrderItem, index: number) {
+    if (item.quantity === 1) {
+      this.order.items = this.order.items.slice(0, index);
+    }
+    this.orderService.decrementFromCart(item.product);
+  }
+
+  getQuantity(index: number) {
+    return this.orderService.getItemQuantity(index);
+  }
+
+  getSubTotal(index: number): number {
+    return this.orderService.getItemSubTotal(index);
+  }
+
   get total() {
-    let total = 0.0;
-    this.order.items.forEach((item, i) => {
-      total += item.price * this.quantitiesPerItem[i];
-    });
-    return total;
+    return this.orderService.getOrder().total;
   }
 }

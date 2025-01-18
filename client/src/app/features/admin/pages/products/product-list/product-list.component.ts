@@ -1,6 +1,6 @@
 import { NgIf } from "@angular/common";
 import { Component } from "@angular/core";
-import { RouterLink } from "@angular/router";
+import { Router, RouterLink } from "@angular/router";
 import { Product } from "@core/interfaces/product";
 import { ProductService } from "@core/services/product.service";
 import { AdminLayoutComponent } from "@features/admin/components/admin-layout/admin-layout.component";
@@ -11,6 +11,9 @@ import { TagModule } from "primeng/tag";
 import { IconFieldModule } from "primeng/iconfield";
 import { InputIconModule } from "primeng/inputicon";
 import { InputTextModule } from "primeng/inputtext";
+import { SpeedDialModule } from "primeng/speeddial";
+import { MenuItem, MenuItemCommandEvent } from "primeng/api";
+
 @Component({
   selector: "app-product-list",
   imports: [
@@ -24,6 +27,7 @@ import { InputTextModule } from "primeng/inputtext";
     TableModule,
     InputTextModule,
     NgIf,
+    SpeedDialModule,
   ],
   providers: [ProductService],
   templateUrl: "./product-list.component.html",
@@ -32,14 +36,24 @@ import { InputTextModule } from "primeng/inputtext";
 export class ProductListComponent {
   products: Product[] = null;
   loading: boolean = true;
+  items: MenuItem[] | undefined;
 
-  constructor(private productService: ProductService) {
+  constructor(private productService: ProductService, private router: Router) {
     this.productService.findAll().subscribe((value) => {
       this.products = value;
       this.loading = false;
     });
-
-    console.log(this.products);
+    this.items = [
+      {
+        icon: "pi pi-pencil",
+      },
+      {
+        icon: "pi pi-trash",
+      },
+      {
+        icon: "pi pi-upload",
+      },
+    ];
   }
 
   getTargetValue(event: any): any {

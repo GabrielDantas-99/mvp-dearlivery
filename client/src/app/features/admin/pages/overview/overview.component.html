@@ -14,56 +14,26 @@
     </div>
   </div>
   <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
-    <p-card class="md:col-span-2 lg:col-span-1">
+    <p-card
+      *ngFor="let sum of summaryCards"
+      class="md:col-span-2 lg:col-span-1 relative"
+    >
       <ng-template #title>
         <div class="flex items-center justify-between">
-          <h1 class="text-xl">Produtos</h1>
-          <i class="pi pi-cart-arrow-down text-xl"></i>
+          <h1 class="md:text-2xl">{{ sum.title }}</h1>
+          <div class="h-full absolute right-5 top-0 grid place-items-center">
+            <i class="pi {{ sum.icon }} md:text-5xl"></i>
+          </div>
         </div>
       </ng-template>
-      <div class="flex items-end gap-1">
-        <p class="m-0 text-3xl">28</p>
-        <span class="mb-0.5">Cadastrados</span>
-      </div>
-    </p-card>
-    <p-card class="md:col-span-2 lg:col-span-1">
-      <ng-template #title>
-        <div class="flex items-center justify-between">
-          <h1 class="text-xl">Categorias</h1>
-          <i class="pi pi-tags text-xl"></i>
-        </div>
-      </ng-template>
-      <div class="flex items-end gap-1">
-        <p class="m-0 text-3xl">5</p>
-        <span class="mb-0.5">Relacionadas</span>
-      </div>
-    </p-card>
-    <p-card class="md:col-span-2 lg:col-span-1">
-      <ng-template #title>
-        <div class="flex items-center justify-between">
-          <h1 class="text-xl">Pedidos</h1>
-          <i class="pi pi-box text-xl"></i>
-        </div>
-      </ng-template>
-      <div class="flex items-end gap-1">
-        <p class="m-0 text-3xl">121</p>
-        <span class="mb-0.5">Finalizados</span>
-      </div>
-    </p-card>
-    <p-card class="md:col-span-2 lg:col-span-1">
-      <ng-template #title>
-        <div class="flex items-center justify-between">
-          <h1 class="text-xl">Clientes</h1>
-          <i class="pi pi-users text-xl"></i>
-        </div>
-      </ng-template>
-      <div class="flex items-end gap-1">
-        <p class="m-0 text-3xl">56</p>
-        <span class="mb-0.5">Registrados</span>
+      <div class="flex items-baseline gap-1">
+        <p class="m-0 text-3xl">{{ sum.value }}</p>
+        <span>{{ sum.label }}</span>
       </div>
     </p-card>
     <p-card class="col-span-4" header="Todos os Pedidos">
       <p-table
+        #dt1
         *ngIf="orders$ | async as orders; else spinner"
         [value]="orders"
         [paginator]="true"
@@ -71,6 +41,29 @@
         [tableStyle]="{ 'min-width': '50rem' }"
         [rowsPerPageOptions]="[5, 10, 20]"
       >
+        <ng-template #caption>
+          <div class="flex items-center justify-between">
+            <span class="text-xl font-bold">Gerenciar Produtos</span>
+            <div class="flex items-center gap-2">
+              <p-iconfield iconPosition="left" class="ml-auto">
+                <p-inputicon>
+                  <i class="pi pi-search"></i>
+                </p-inputicon>
+                <input
+                  pInputText
+                  type="text"
+                  (input)="dt1.filterGlobal(getTargetValue($event), 'contains')"
+                  placeholder="Buscar produto"
+                />
+              </p-iconfield>
+              <p-button
+                [routerLink]="['../products/product-form']"
+                label="Novo"
+                icon="pi pi-plus"
+              />
+            </div>
+          </div>
+        </ng-template>
         <ng-template #header>
           <tr>
             <th style="width: 25%">Cliente</th>

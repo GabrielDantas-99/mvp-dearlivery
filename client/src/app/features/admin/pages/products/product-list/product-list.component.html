@@ -41,18 +41,17 @@
         <th>Categorias</th>
         <th>Preço</th>
         <th>Qntd.</th>
+        <th></th>
       </tr>
     </ng-template>
     <ng-template #body let-product>
-      <tr
-        class="cursor-pointer hover:bg-[--my-datatable-row-hover-background]"
-        [routerLink]="['product-form', product.id]"
-      >
+      <tr class="cursor-pointer hover:bg-[--my-datatable-row-hover-background]">
+        <!-- [routerLink]="['product-form', product.id]" -->
         <td>
           <img
-            src="https://primefaces.org/cdn/primeng/images/demo/product/bamboo-watch.jpg"
+            [src]="product.imgUrl"
             alt="Imagem do produto {{ product.title }}"
-            class="w-24 rounded"
+            class="w-24 h-24 rounded object-contain"
           />
         </td>
         <td>{{ product.title }}</td>
@@ -61,6 +60,19 @@
 
         <td>
           <p-tag [value]="product.inStock" />
+        </td>
+        <td>
+          <p-speeddial [model]="items" direction="left">
+            <ng-template #button let-toggleCallback="toggleCallback">
+              <p-button
+                severity="secondary"
+                styleClass="border"
+                (click)="toggleCallback($event)"
+              >
+                <i class="pi pi-ellipsis-v"></i>
+              </p-button>
+            </ng-template>
+          </p-speeddial>
         </td>
       </tr>
     </ng-template>
