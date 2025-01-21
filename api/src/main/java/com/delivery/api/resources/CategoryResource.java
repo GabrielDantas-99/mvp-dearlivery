@@ -4,6 +4,7 @@ import java.net.URI;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,12 +34,13 @@ public class CategoryResource {
   }
 
   @GetMapping("/{productId}")
-  public ResponseEntity<Category> findAll(@PathVariable Long productId) {
+  public ResponseEntity<Category> findById(@PathVariable Long productId) {
     Category product = categoryService.findById(productId);
     return ResponseEntity.ok().body(product);
   }
 
   @PostMapping
+  @PreAuthorize("hasAnyRole('ADMIN')")
   public ResponseEntity<Category> create(@RequestBody Category productDto) {
     Category newCategory = categoryService.create(productDto);
     URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
@@ -47,12 +49,14 @@ public class CategoryResource {
   }
 
   @PutMapping
+  @PreAuthorize("hasAnyRole('ADMIN')")
   public ResponseEntity<Category> update(@RequestBody Category productDto) {
     Category product = categoryService.update(productDto);
     return ResponseEntity.ok().body(product);
   }
 
   @DeleteMapping("/{productId}")
+  @PreAuthorize("hasAnyRole('ADMIN')")
   public ResponseEntity<Void> delete(@PathVariable Long productId) {
     categoryService.delete(productId);
     return ResponseEntity.noContent().build();
