@@ -10,6 +10,9 @@ import { RouterLink } from "@angular/router";
 import { PasswordModule } from "primeng/password";
 import { DividerModule } from "primeng/divider";
 import { AuthDialogComponent } from "../auth-dialog/auth-dialog.component";
+import { OrderService } from "@core/services/order.service";
+import { AuthService } from "@core/services/auth.service";
+import { NgIf } from "@angular/common";
 
 @Component({
   selector: "app-store-layout",
@@ -23,6 +26,7 @@ import { AuthDialogComponent } from "../auth-dialog/auth-dialog.component";
     PasswordModule,
     DividerModule,
     AuthDialogComponent,
+    NgIf,
   ],
   templateUrl: "./store-layout.component.html",
   styleUrl: "./store-layout.component.css",
@@ -32,7 +36,11 @@ export class StoreLayoutComponent {
   drawerVisible: boolean = false;
   authDialogVisible: boolean = false;
 
-  constructor(private categoryService: CategoryService) {
+  constructor(
+    private categoryService: CategoryService,
+    private orderService: OrderService,
+    private authService: AuthService
+  ) {
     this.categoryService.findAll().subscribe((res) => (this.categories = res));
   }
 
@@ -47,5 +55,17 @@ export class StoreLayoutComponent {
 
   closeDialog() {
     this.authDialogVisible = false;
+  }
+
+  get cartItems() {
+    let cartItems = 0;
+    this.orderService.getOrder().items.forEach((item) => {
+      cartItems += item.quantity;
+    });
+    return cartItems;
+  }
+
+  get user() {
+    return this.authService.user;
   }
 }

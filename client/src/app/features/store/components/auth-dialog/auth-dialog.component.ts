@@ -6,14 +6,17 @@ import {
   ReactiveFormsModule,
   Validators,
 } from "@angular/forms";
-import { RouterLink } from "@angular/router";
-import { MessageService } from "primeng/api";
+import { Router, RouterLink } from "@angular/router";
+import { AuthService } from "@core/services/auth.service";
 import { ButtonModule } from "primeng/button";
 import { Dialog } from "primeng/dialog";
 import { DividerModule } from "primeng/divider";
 import { InputTextModule } from "primeng/inputtext";
 import { PasswordModule } from "primeng/password";
 import { ToastModule } from "primeng/toast";
+import { NgIf } from "@angular/common";
+import { Message } from "primeng/message";
+import { MessageService } from "primeng/api";
 
 @Component({
   selector: "app-auth-dialog",
@@ -27,6 +30,8 @@ import { ToastModule } from "primeng/toast";
     ReactiveFormsModule,
     RouterLink,
     ToastModule,
+    NgIf,
+    Message,
   ],
   providers: [MessageService],
   templateUrl: "./auth-dialog.component.html",
@@ -34,10 +39,15 @@ import { ToastModule } from "primeng/toast";
 })
 export class AuthDialogComponent {
   @Input() authDialogVisible: boolean;
+  @Input() showContinueWithLogin: boolean = false;
   @Output() closeDialog = new EventEmitter();
   loginForm: FormGroup;
 
-  constructor(private toast: MessageService) {
+  constructor(
+    private authService: AuthService,
+    private toast: MessageService,
+    private router: Router
+  ) {
     this.initForm();
   }
 
@@ -53,14 +63,29 @@ export class AuthDialogComponent {
 
   login() {
     if (!this.loginForm.valid) {
-      this.toast.add({
-        severity: "error",
-        summary: "Atenção!",
-        detail: "Preencha os campos do formulário corretamente!",
-      });
-      console.log(this.loginForm.value);
+      this.showContinueWithLogin = true;
       return;
     }
+    this.authService.login(this.loginForm.value).subscribe({
+      next: (res) => {
+        this._closeDialog();
+        this.loginForm.reset();
+        this.router.navigate(["/"]);
+        this.toast.add({
+          severity: "success",
+          summary: "Bem-vindo(a), novamente!",
+        });
+      },
+      error: (err) => {
+        this._closeDialog();
+        this.loginForm.reset();
+        this.toast.add({
+          severity: "error",
+          summary: "Opss...",
+          detail: "Credenciais inválidas!",
+        });
+      },
+    });
   }
 
   _closeDialog() {

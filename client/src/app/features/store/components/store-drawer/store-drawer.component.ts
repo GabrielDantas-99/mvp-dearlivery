@@ -14,10 +14,11 @@ import { Drawer } from "primeng/drawer";
 import { CategoryService } from "@core/services/category.service";
 import { Category } from "@core/interfaces/category";
 import { NgClass, NgFor, NgIf } from "@angular/common";
-import { RouterLink } from "@angular/router";
+import { Router, RouterLink } from "@angular/router";
 import { User } from "@core/interfaces/User";
 import { ToggleSwitch } from "primeng/toggleswitch";
 import { toggleDarkMode } from "app/app.component";
+import { AuthService } from "@core/services/auth.service";
 
 @Component({
   selector: "app-store-drawer",
@@ -41,15 +42,9 @@ export class StoreDrawerComponent {
   @ViewChild("drawerRef") drawerRef!: Drawer;
   @Input() drawerVisible: boolean = false;
   @Input() categories: Category[] = null;
-  @Input() user: User = null;
   @Output() toggleDrawer = new EventEmitter();
   @Output() showAuthDialog = new EventEmitter();
-  // {
-  //   name: "Amy Lee",
-  //   email: "amy.lee@hotmail.com",
-  //   imgUrl:
-  //     "https://images.pexels.com/photos/3763188/pexels-photo-3763188.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-  // };
+
   checked: boolean = false;
 
   credentials: any = {
@@ -57,6 +52,8 @@ export class StoreDrawerComponent {
     password: null,
   };
   showDialog: boolean;
+
+  constructor(private authService: AuthService, private router: Router) {}
 
   closeCallback(e): void {
     this.drawerRef.close(e);
@@ -70,5 +67,14 @@ export class StoreDrawerComponent {
 
   _showAuthDialog() {
     this.showAuthDialog.emit();
+  }
+
+  get user() {
+    return this.authService.user;
+  }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigate(["/"]);
   }
 }

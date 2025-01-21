@@ -169,7 +169,7 @@
               <p class="truncate text-xs">{{ user.email }}</p>
             </div>
           </a>
-          <p-toggleswitch
+          <!-- <p-toggleswitch
             class="flex items-center mr-4"
             (click)="toggleDarkMode()"
           >
@@ -178,7 +178,13 @@
                 [ngClass]="['!text-xs', 'pi', checked ? 'pi-sun' : 'pi-moon']"
               ></i>
             </ng-template>
-          </p-toggleswitch>
+          </p-toggleswitch> -->
+          <a
+            (click)="logout()"
+            class="p-4 rounded-md cursor-pointer grid place-items-center text-red-500 bg-red-200"
+          >
+            <i class="pi pi-sign-out"></i>
+          </a>
         </div>
         <ng-template #loginForm>
           <div class="p-4 pt-0 text-center">

@@ -91,4 +91,9 @@
       </div>
     </div>
   </div>
+  <app-auth-dialog
+    [showContinueWithLogin]="true"
+    (closeDialog)="closeDialog()"
+    [authDialogVisible]="authDialogVisible"
+  />
 </app-store-layout>

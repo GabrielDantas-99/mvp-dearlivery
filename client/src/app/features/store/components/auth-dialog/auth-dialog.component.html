@@ -18,6 +18,12 @@
       />
     </div>
   </ng-template>
+  <p-message
+    styleClass="mb-4 mt-1 leading-5"
+    *ngIf="showContinueWithLogin"
+    closable
+    >Realize o login para continuar com sua compra.</p-message
+  >
   <div class="flex overflow-hidden">
     <div class="min-w-full transition ease-in-out duration-500">
       <span class="p-text-secondary block leading-5 hyphens-auto"
@@ -60,7 +66,12 @@
             >
           </div>
         </div>
-        <p-button class="btn-full mt-4" label="Entrar" type="submit" />
+        <p-button
+          class="btn-full mt-4"
+          label="Entrar"
+          type="submit"
+          [disabled]="!loginForm.valid"
+        />
       </form>
       <p-divider align="center">
         <span class="opacity-50">Ou</span>
