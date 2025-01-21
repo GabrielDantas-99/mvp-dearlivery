@@ -67,9 +67,20 @@ p-avatar img {
   > input.p-inputtext.p-component.p-password-input {
   width: 100% !important;
 }
+
 p-toastitem {
   z-index: 999 !important;
 }
+
 .p-toast.p-component.p-toast-top-right {
   z-index: 999 !important;
+}
+
+p-inputmask {
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+p-inputmask input {
+  width: 100%;
 }

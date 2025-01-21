@@ -6,7 +6,8 @@ import {
   ReactiveFormsModule,
   Validators,
 } from "@angular/forms";
-import { RouterLink } from "@angular/router";
+import { Router, RouterLink } from "@angular/router";
+import { AuthService } from "@core/services/auth.service";
 import { TermsDialogComponent } from "@features/auth/components/terms-dialog/terms-dialog.component";
 import { MessageService } from "primeng/api";
 import { ButtonModule } from "primeng/button";
@@ -15,14 +16,13 @@ import { Checkbox } from "primeng/checkbox";
 import { InputTextModule } from "primeng/inputtext";
 import { PasswordModule } from "primeng/password";
 import { ToastModule } from "primeng/toast";
+import { InputMask } from "primeng/inputmask";
 
 interface LoginForm {
-  username: FormControl;
-  surname: FormControl;
+  name: FormControl;
   email: FormControl;
   password: FormControl;
-  repassword: FormControl;
-  terms: FormControl;
+  phone: FormControl;
 }
 
 @Component({
@@ -38,6 +38,7 @@ interface LoginForm {
     Checkbox,
     RouterLink,
     TermsDialogComponent,
+    InputMask,
   ],
   providers: [MessageService],
   templateUrl: "./register.component.html",
@@ -48,13 +49,13 @@ export class RegisterComponent {
 
   loginForm!: FormGroup<LoginForm>;
 
-  constructor(private toast: MessageService) {
+  constructor(
+    private toast: MessageService,
+    private authService: AuthService,
+    private router: Router
+  ) {
     this.loginForm = new FormGroup({
-      username: new FormControl(null, [
-        Validators.required,
-        Validators.minLength(3),
-      ]),
-      surname: new FormControl(null, [
+      name: new FormControl(null, [
         Validators.required,
         Validators.minLength(3),
       ]),
@@ -63,13 +64,14 @@ export class RegisterComponent {
         Validators.required,
         Validators.minLength(6),
       ]),
-      repassword: new FormControl(null, [
+      phone: new FormControl(null, [
         Validators.required,
-        Validators.minLength(6),
+        Validators.minLength(11),
       ]),
-      terms: new FormControl(null, [Validators.required]),
     });
   }
+
+  terms = new FormControl(null, [Validators.required]);
 
   register() {
     if (!this.loginForm.valid) {
@@ -80,7 +82,9 @@ export class RegisterComponent {
       });
       return;
     }
-    console.log(this.loginForm.get("terms").value);
+    this.authService.register(this.loginForm.value).subscribe((res) => {
+      this.router.navigate(["/"]);
+    });
   }
 
   openTerms() {}

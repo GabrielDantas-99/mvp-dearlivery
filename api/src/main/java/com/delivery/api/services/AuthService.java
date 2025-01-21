@@ -34,6 +34,9 @@ public class AuthService {
     userRepository.save(user);
     var jwtToken = jwtService.generateToken(user);
     return CostumerAuthenticationResponseDTO.builder()
+        .name(user.getName())
+        .email(user.getEmail())
+        .role(user.getRole())
         .accessToken(jwtToken)
         .build();
   }
