@@ -1,0 +1,122 @@
+<div
+  class="p-4 min-h-screen flex items-center justify-center bg-cover bg-[url(/banner-background-auth.jpg)]"
+>
+  <p-card class="w-full">
+    <ng-template #header>
+      <a routerLink="../" class="flex items-center justify-between m-4 mb-0">
+        <h1 class="text-2xl font-semibold">Registrar</h1>
+        <div class="flex items-center gap-1">
+          <i class="pi pi-angle-left"></i>
+          <span>Voltar</span>
+        </div>
+      </a>
+    </ng-template>
+    <p class="opacity-50 mb-4 leading-5">
+      Preencha os campos abaixo para realizar seu cadastro.
+    </p>
+    <form
+      [formGroup]="loginForm"
+      (ngSubmit)="register()"
+      class="mt-4 flex flex-col space-y-3"
+    >
+      <div class="grid grid-cols-2 gap-2 w-full">
+        <div class="flex flex-col">
+          <label for="username" class="font-semibold w-24">Nome</label>
+          <input
+            formControlName="username"
+            pInputText
+            id="username"
+            required
+            class="flex-auto"
+            autocomplete="off"
+          />
+        </div>
+        <div class="flex flex-col">
+          <label for="surname" class="font-semibold w-24">Sobrenome</label>
+          <input
+            formControlName="surname"
+            pInputText
+            id="username"
+            required
+            class="flex-auto"
+            autocomplete="off"
+          />
+        </div>
+      </div>
+      <div class="flex flex-col">
+        <label for="email" class="font-semibold w-24">Email</label>
+        <input
+          formControlName="email"
+          pInputText
+          id="email"
+          required
+          class="flex-auto"
+          autocomplete="off"
+        />
+      </div>
+      <div class="flex flex-col mt-3">
+        <label for="password" class="text-primary-50 font-semibold">
+          Senha
+        </label>
+        <p-password
+          id="password"
+          formControlName="password"
+          class="flex-auto w-full"
+          type="password"
+          feedback="true"
+          required
+          [toggleMask]="true"
+          weakLabel="Fraca"
+          mediumLabel="Moderada"
+          strongLabel="Forte"
+        />
+      </div>
+      <div class="flex flex-col mt-3">
+        <label for="re-password" class="text-primary-50 font-semibold">
+          Repetir senha
+        </label>
+        <p-password
+          id="re-password"
+          formControlName="repassword"
+          class="flex-auto w-full"
+          type="repassword"
+          feedback="false"
+          required
+          [toggleMask]="true"
+        />
+      </div>
+      <div class="flex items-center mt-3">
+        <p-checkbox
+          formControlName="terms"
+          inputId="terms"
+          name="terms"
+          [value]="'Formulário aceito: ' + now"
+        />
+        <label for="terms" class="ml-2 leading-5">
+          Ao aceitar, você estará concordando com os
+          <b
+            class="cursor-pointer hover:underline"
+            (click)="termsVisible = true"
+          >
+            Termos e Condições <i class="pi pi-external-link text-xs ml-1"></i>
+          </b>
+          .
+        </label>
+      </div>
+      <div class="mt-6">
+        <p-button
+          type="submit"
+          class="btn-full"
+          label="Registrar"
+          [disabled]="!loginForm.valid"
+        />
+      </div>
+    </form>
+  </p-card>
+  <p-toast
+    [breakpoints]="{
+      '920px': { width: '90%', right: '0', left: '0', margin: '0 auto' }
+    }"
+  />
+  <app-terms-dialog (closeTerms)="closeTerms()" [termsVisible]="termsVisible" />
+</div>

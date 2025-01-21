@@ -4,11 +4,16 @@ import { ProductListComponent } from "./features/admin/pages/products/product-li
 import { ProductFormComponent } from "@features/admin/pages/products/product-form/product-form.component";
 import { StoreCatalogComponent } from "@features/store/pages/store-catalog/store-catalog.component";
 import { MyCartComponent } from "@features/store/pages/my-cart/my-cart.component";
+import { RegisterComponent } from "@features/auth/pages/register/register.component";
 
 export const routes: Routes = [
   {
     path: "",
     component: StoreCatalogComponent,
+  },
+  {
+    path: "register",
+    component: RegisterComponent,
   },
   {
     path: "overview",

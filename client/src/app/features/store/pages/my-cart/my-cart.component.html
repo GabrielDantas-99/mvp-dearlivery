@@ -27,11 +27,11 @@
           <p-button
             (onClick)="saveOrder()"
             severity="secondary"
-            class="btn-cart w-full"
+            class="btn-full w-full"
             label="Salvar Pedido"
           />
           <p-button
-            class="btn-cart w-full"
+            class="btn-full w-full"
             label="Finalizar Pedido ({{ order.items.length }})"
           />
         </div>
@@ -103,7 +103,7 @@
             />
             <span class="w-1/3 text-center">{{ getQuantity(i) }}</span>
             <p-button
-              (onClick)="decrementFromCart(item, i)"
+              (onClick)="decrementFromCart(item)"
               icon="pi pi-minus"
               [text]="true"
               [outlined]="false"

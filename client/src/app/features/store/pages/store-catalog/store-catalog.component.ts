@@ -12,6 +12,7 @@ import { Rating } from "primeng/rating";
 import { FormsModule } from "@angular/forms";
 import { CurrencyBrPipe } from "../../../../shared/pipes/currency-br.pipe";
 import { OrderService } from "@core/services/order.service";
+import { AuthService } from "@core/services/auth.service";
 
 @Component({
   selector: "app-store-catalog",
@@ -33,12 +34,12 @@ export class StoreCatalogComponent {
   products: Product[] = null;
   activeCategory: number = 0;
   rating: number[] = [];
-  Math: Math;
 
   constructor(
     private categoryService: CategoryService,
     private productService: ProductService,
-    private orderService: OrderService
+    private orderService: OrderService,
+    private authService: AuthService
   ) {
     this.categoryService.findAll().subscribe((res) => (this.categories = res));
     this.productService.findAll().subscribe((res) => {

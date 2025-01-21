@@ -3,10 +3,9 @@
     <ng-template #start>
       <p-button
         icon="pi pi-bars text-xl"
-        severity="secondary"
-        class="p-1"
+        variant="text"
+        styleClass="h-12 w-12"
         (onClick)="toggleDrawer($event)"
-        [outlined]="true"
       />
     </ng-template>
     <ng-template #center>
@@ -21,10 +20,16 @@
       </p-button>
     </ng-template>
   </p-toolbar>
-  <app-store-drawer
-    (toggleDrawer)="toggleDrawer($event)"
-    [visible]="visible"
-    [categories]="categories"
+  <app-auth-dialog
+    (closeDialog)="closeDialog()"
+    [authDialogVisible]="authDialogVisible"
   />
+  <app-store-drawer
+    [drawerVisible]="drawerVisible"
+    [categories]="categories"
+    (toggleDrawer)="toggleDrawer($event)"
+    (showAuthDialog)="showAuthDialog()"
+  />
+
   <ng-content />
 </div>

@@ -1,4 +1,4 @@
-<p-drawer #drawerRef [(visible)]="visible">
+<p-drawer #drawerRef [(visible)]="drawerVisible">
   <ng-template #headless>
     <div class="flex flex-col h-full">
       <div class="flex items-center justify-between px-6 pt-4 shrink-0">
@@ -6,16 +6,12 @@
           <span class="text-[--primary]">Dear</span>
           <span class="text-slate-400">livery</span>
         </div>
-        <span>
-          <p-button
-            type="button"
-            (click)="closeCallback($event)"
-            icon="pi pi-times"
-            rounded="true"
-            outlined="true"
-            styleClass="h-8 w-8"
-          ></p-button>
-        </span>
+        <p-button
+          (click)="closeCallback($event)"
+          icon="pi pi-times"
+          variant="text"
+          styleClass="h-12 w-12 -mr-2"
+        />
       </div>
       <div class="overflow-y-auto">
         <ul class="list-none p-4 m-0">
@@ -93,7 +89,7 @@
             </ul>
           </li>
         </ul>
-        <ul class="list-none p-4 m-0">
+        <ul *ngIf="user" class="list-none p-4 m-0">
           <li>
             <div
               pRipple
@@ -150,16 +146,53 @@
       </div>
       <div class="mt-auto">
         <hr class="mb-4 mx-4 border-t border-0 border-surface" />
-        <a
-          pRipple
-          class="m-4 flex items-center cursor-pointer p-4 gap-2 rounded-border text-surface-700 dark:text-surface-100 hover:bg-surface-100 dark:hover:bg-surface-700 duration-150 transition-colors p-ripple"
+        <div
+          *ngIf="user; else loginForm"
+          class="flex items-center gap-2 m-4 justify-between"
         >
-          <p-avatar
-            image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
-            shape="circle"
-          />
-          <span class="font-bold">Amy Elsner</span>
-        </a>
+          <a
+            pRipple
+            class="flex items-center cursor-pointer p-4 gap-2 rounded-border text-surface-700 dark:text-surface-100 hover:bg-surface-100 dark:hover:bg-surface-700 duration-150 transition-colors p-ripple"
+          >
+            @if (user.imgUrl) {
+            <p-avatar [image]="user.imgUrl" size="large" shape="circle" />
+            } @else {
+            <p-avatar
+              class="bg-[#dee9fc] text-[#1a2551] min-w-12 min-h-12"
+              size="large"
+              shape="circle"
+              [label]="user.name.slice(0, 1)"
+            />
+            }
+            <div class="leading-4 max-w-32">
+              <p class="font-bold">{{ user.name }}</p>
+              <p class="truncate text-xs">{{ user.email }}</p>
+            </div>
+          </a>
+          <p-toggleswitch
+            class="flex items-center mr-4"
+            (click)="toggleDarkMode()"
+          >
+            <ng-template #handle let-checked="checked">
+              <i
+                [ngClass]="['!text-xs', 'pi', checked ? 'pi-sun' : 'pi-moon']"
+              ></i>
+            </ng-template>
+          </p-toggleswitch>
+        </div>
+        <ng-template #loginForm>
+          <div class="p-4 pt-0 text-center">
+            <h2 class="text-xl font-medium">Faça seu login!</h2>
+            <p class="leading-4 text-zinc-400 mt-1 mb-4">
+              Realize o seu login para ter acesso à nossa plataforma.
+            </p>
+            <p-button
+              class="btn-full"
+              (click)="_showAuthDialog()"
+              label="Contectar-se"
+            />
+          </div>
+        </ng-template>
       </div>
     </div>
   </ng-template>

@@ -27,6 +27,7 @@
   --secondary: rgb(71 85 105 / 75%);
   --box-shadow: #d9ddfc9f;
   --my-rating-icon-active-color: #eab308;
+  --my-divider-border-color: #dce4f0;
 }
 
 body {
@@ -53,6 +54,16 @@ body {
   font-family: "Baloo Bhaijaan 2", "primeicons", serif !important;
 }
 
-p-button.btn-cart button {
+p-button.btn-full button {
+  width: 100% !important;
+}
+
+p-avatar img {
+  object-fit: cover !important;
+}
+
+.p-password.p-component.p-inputwrapper,
+.p-password.p-component.p-inputwrapper
+  > input.p-inputtext.p-component.p-password-input {
   width: 100% !important;
 }
