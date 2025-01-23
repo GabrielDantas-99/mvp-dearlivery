@@ -1,6 +1,6 @@
 <app-store-layout>
   <div class="flex flex-col space-y-4 pb-8">
-    <img class="bg-red-200" src="/banner.png" alt="banner-principal" />
+    <img src="/banner.png" alt="banner-principal" />
     <div class="shop-by-category">
       <div class="flex items-center justify-between px-4">
         <h2 class="text-xl font-medium">Comprar por Categoria</h2>
@@ -85,10 +85,15 @@
             (onClick)="addToCart(product)"
             label="Adicionar ao Carrinho"
             icon="pi pi-cart-plus"
-            class="btn-cart !flex !items-center mt-2 leading-4"
+            class="btn-full !flex !items-center mt-2 leading-4"
           />
         </p-panel>
       </div>
     </div>
   </div>
+  <app-auth-dialog
+    [showContinueWithLogin]="true"
+    (closeDialog)="closeDialog()"
+    [authDialogVisible]="authDialogVisible"
+  />
 </app-store-layout>

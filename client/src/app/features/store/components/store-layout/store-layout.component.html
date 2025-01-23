@@ -3,28 +3,45 @@
     <ng-template #start>
       <p-button
         icon="pi pi-bars text-xl"
-        severity="secondary"
-        class="p-1"
+        variant="text"
+        styleClass="h-12 w-12"
         (onClick)="toggleDrawer($event)"
-        [outlined]="true"
       />
     </ng-template>
     <ng-template #center>
-      <div class="flex items-center text-3xl px-4 h-16 font-semibold">
+      <div
+        [routerLink]="['/']"
+        class="flex cursor-pointer items-center text-3xl px-4 h-16 font-semibold"
+      >
         <span class="text-[--primary]">Dear</span>
         <span class="text-slate-400">livery</span>
       </div>
     </ng-template>
     <ng-template #end>
-      <p-button routerLink="/my-cart" severity="secondary" [text]="true">
-        <i class="pi pi-cart-arrow-down text-2xl" pBadge value="2"></i>
+      <p-button
+        *ngIf="user"
+        routerLink="/my-cart"
+        severity="secondary"
+        [text]="true"
+      >
+        <i
+          class="pi pi-cart-arrow-down text-2xl"
+          pBadge
+          [value]="cartItems"
+        ></i>
       </p-button>
     </ng-template>
   </p-toolbar>
-  <app-store-drawer
-    (toggleDrawer)="toggleDrawer($event)"
-    [visible]="visible"
-    [categories]="categories"
+  <app-auth-dialog
+    (closeDialog)="closeDialog()"
+    [authDialogVisible]="authDialogVisible"
   />
+  <app-store-drawer
+    [drawerVisible]="drawerVisible"
+    [categories]="categories"
+    (toggleDrawer)="toggleDrawer($event)"
+    (showAuthDialog)="showAuthDialog()"
+  />
+
   <ng-content />
 </div>

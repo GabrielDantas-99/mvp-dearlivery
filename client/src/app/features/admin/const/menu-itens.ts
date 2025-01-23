@@ -45,10 +45,6 @@ export const MENU_ITEMS = [
         icon: "pi pi-inbox",
         badge: "2",
       },
-      {
-        label: "Sair",
-        icon: "pi pi-sign-out",
-      },
     ],
   },
   {

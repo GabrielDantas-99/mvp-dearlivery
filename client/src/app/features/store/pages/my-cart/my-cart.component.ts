@@ -7,7 +7,6 @@ import { OrderService } from "@core/services/order.service";
 import { Order } from "@core/interfaces/order";
 import { CheckboxModule } from "primeng/checkbox";
 import { NgFor } from "@angular/common";
-import { InputNumber } from "primeng/inputnumber";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { OrderItem } from "@core/interfaces/order-item";
 import { MenuModule } from "primeng/menu";
@@ -22,7 +21,6 @@ import { Product } from "@core/interfaces/product";
     ButtonModule,
     CheckboxModule,
     NgFor,
-    InputNumber,
     ReactiveFormsModule,
     FormsModule,
     MenuModule,
@@ -71,11 +69,9 @@ export class MyCartComponent {
     this.orderService.addToCart(product);
   }
 
-  decrementFromCart(item: OrderItem, index: number) {
-    if (item.quantity === 1) {
-      this.order.items = this.order.items.slice(0, index);
-    }
+  decrementFromCart(item: OrderItem) {
     this.orderService.decrementFromCart(item.product);
+    this.order = this.orderService.getCart();
   }
 
   getQuantity(index: number) {
