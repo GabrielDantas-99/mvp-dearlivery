@@ -31,6 +31,16 @@
           </span>
         </a>
       </ng-template>
+      <ng-template #item>
+        <a
+          (click)="logout()"
+          pRipple
+          class="flex items-center p-menu-item-link"
+        >
+          <span class="pi pi-sign-out"></span>
+          <span class="ml-2">Desconectar</span>
+        </a>
+      </ng-template>
       <ng-template class="bottom-0" #end>
         <button
           pRipple

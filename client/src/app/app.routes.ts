@@ -5,6 +5,7 @@ import { ProductFormComponent } from "@features/admin/pages/products/product-for
 import { StoreCatalogComponent } from "@features/store/pages/store-catalog/store-catalog.component";
 import { MyCartComponent } from "@features/store/pages/my-cart/my-cart.component";
 import { RegisterComponent } from "@features/auth/pages/register/register.component";
+import { authGuard } from "@core/guards/auth.guard";
 
 export const routes: Routes = [
   {
@@ -18,21 +19,31 @@ export const routes: Routes = [
   {
     path: "overview",
     component: OverviewComponent,
+    canActivate: [authGuard],
+    data: { roles: ["ADMIN"] },
   },
   {
     path: "products",
     component: ProductListComponent,
+    canActivate: [authGuard],
+    data: { roles: ["ADMIN"] },
   },
   {
     path: "products/product-form",
     component: ProductFormComponent,
+    canActivate: [authGuard],
+    data: { roles: ["ADMIN"] },
   },
   {
     path: "products/product-form/:productId",
     component: ProductFormComponent,
+    canActivate: [authGuard],
+    data: { roles: ["ADMIN"] },
   },
   {
     path: "my-cart",
     component: MyCartComponent,
+    canActivate: [authGuard],
+    data: { roles: ["COSTUMER"] },
   },
 ];

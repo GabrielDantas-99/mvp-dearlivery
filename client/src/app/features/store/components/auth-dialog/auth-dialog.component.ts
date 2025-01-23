@@ -70,7 +70,12 @@ export class AuthDialogComponent {
       next: (res) => {
         this._closeDialog();
         this.loginForm.reset();
-        this.router.navigate(["/"]);
+        if (this.authService.user.role === "ADMIN") {
+          this.router.navigate(["/overview"]);
+        }
+        if (this.authService.user.role === "COSTUMER") {
+          this.router.navigate(["/"]);
+        }
         this.toast.add({
           severity: "success",
           summary: "Bem-vindo(a), novamente!",

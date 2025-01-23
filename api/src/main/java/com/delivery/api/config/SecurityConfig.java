@@ -21,12 +21,6 @@ import lombok.RequiredArgsConstructor;
 @EnableMethodSecurity
 public class SecurityConfig {
 
-  private static final String[] WHITE_LIST_URL = {
-      "/api/v1/auth/**",
-      "/products/**",
-      "/categories/**",
-      "/h2-console/**"
-  };
   private final JwtAuthenticationFilter jwtAuthFilter;
   private final AuthenticationProvider authenticationProvider;
 
@@ -35,10 +29,6 @@ public class SecurityConfig {
     http
         .csrf(AbstractHttpConfigurer::disable)
         .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
-        .authorizeHttpRequests(req -> req.requestMatchers(WHITE_LIST_URL)
-            .permitAll()
-            .anyRequest()
-            .authenticated())
         .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
         .authenticationProvider(authenticationProvider)
         .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);

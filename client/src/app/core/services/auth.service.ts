@@ -1,8 +1,10 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
 import { CostumerRegisterRequestDTO } from "@core/interfaces/costumer-register-request-dto";
 import { CredentialsRequestDTO } from "@core/interfaces/credentials-request-dto";
-import { User } from "@core/interfaces/User";
+import { LoginResponse } from "@core/interfaces/login-response.dto";
+import { User } from "@core/interfaces/user";
 import { environment as api } from "environments/environment.development";
 import { first, tap } from "rxjs";
 
@@ -10,15 +12,18 @@ import { first, tap } from "rxjs";
   providedIn: "root",
 })
 export class AuthService {
-  private readonly USER_KEY = "costumer";
+  private readonly USER_KEY = "USER_KEY";
+  private readonly TOKEN_KEY = "TOKEN_KEY";
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   login(credentials: CredentialsRequestDTO) {
     return this.http.post(`${api.baseUrl}/api/v1/auth/login`, credentials).pipe(
       first(),
-      tap((res) => {
-        this.user = res;
+      tap((res: LoginResponse) => {
+        console.log(res);
+        this.user = { name: res.name, email: res.email, role: res.role };
+        this.token = res.access_token;
       })
     );
   }
@@ -27,6 +32,7 @@ export class AuthService {
     return this.http.post(`${api.baseUrl}/api/v1/auth/register`, value).pipe(
       first(),
       tap((res) => {
+        console.log(res);
         this.user = res;
       })
     );
@@ -34,6 +40,7 @@ export class AuthService {
 
   logout() {
     localStorage.clear();
+    this.router.navigate(["/"]);
   }
 
   get user(): User {
@@ -43,5 +50,13 @@ export class AuthService {
 
   set user(user: User) {
     localStorage.setItem(this.USER_KEY, JSON.stringify(user));
+  }
+
+  get token() {
+    return JSON.parse(localStorage.getItem(this.TOKEN_KEY));
+  }
+
+  set token(token) {
+    localStorage.setItem(this.TOKEN_KEY, JSON.stringify(token));
   }
 }

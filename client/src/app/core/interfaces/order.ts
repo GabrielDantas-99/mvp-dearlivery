@@ -1,6 +1,6 @@
 import { OrderItem } from "./order-item";
 import { Payment } from "./payment";
-import { User } from "./User";
+import { User } from "./user";
 
 export interface Order {
   id?: number;

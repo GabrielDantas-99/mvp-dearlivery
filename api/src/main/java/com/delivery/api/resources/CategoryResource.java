@@ -28,12 +28,14 @@ public class CategoryResource {
   private final CategoryService categoryService;
 
   @GetMapping
+  @PreAuthorize("permitAll()")
   public ResponseEntity<List<Category>> findAll() {
     List<Category> list = categoryService.findAll();
     return ResponseEntity.ok().body(list);
   }
 
   @GetMapping("/{productId}")
+  @PreAuthorize("permitAll()")
   public ResponseEntity<Category> findById(@PathVariable Long productId) {
     Category product = categoryService.findById(productId);
     return ResponseEntity.ok().body(product);

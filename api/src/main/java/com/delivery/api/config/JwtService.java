@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import com.delivery.api.entities.domain.User;
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -38,6 +40,10 @@ public class JwtService {
   public String generateToken(
       Map<String, Object> extraClaims,
       UserDetails userDetails) {
+    if (userDetails instanceof User) {
+      User user = (User) userDetails;
+      extraClaims.put("role", user.getRole().name());
+    }
     return Jwts.builder().setClaims(extraClaims)
         .setSubject(userDetails.getUsername())
         .setIssuedAt(new Date(System.currentTimeMillis()))

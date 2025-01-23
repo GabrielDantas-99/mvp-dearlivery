@@ -15,7 +15,6 @@ import { CategoryService } from "@core/services/category.service";
 import { Category } from "@core/interfaces/category";
 import { NgClass, NgFor, NgIf } from "@angular/common";
 import { Router, RouterLink } from "@angular/router";
-import { User } from "@core/interfaces/User";
 import { ToggleSwitch } from "primeng/toggleswitch";
 import { toggleDarkMode } from "app/app.component";
 import { AuthService } from "@core/services/auth.service";
@@ -75,6 +74,6 @@ export class StoreDrawerComponent {
 
   logout() {
     this.authService.logout();
-    this.router.navigate(["/"]);
+    window.location.reload();
   }
 }

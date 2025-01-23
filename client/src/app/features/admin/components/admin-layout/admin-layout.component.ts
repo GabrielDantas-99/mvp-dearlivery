@@ -12,6 +12,7 @@ import { FormsModule } from "@angular/forms";
 import { BreadcrumbModule } from "primeng/breadcrumb";
 import { MENU_ITEMS } from "../../const/menu-itens";
 import { RouterLink } from "@angular/router";
+import { AuthService } from "@core/services/auth.service";
 
 @Component({
   selector: "app-admin-layout",
@@ -38,6 +39,8 @@ export class AdminLayoutComponent implements OnInit {
   checked: boolean = false;
   home: MenuItem | undefined;
 
+  constructor(private authService: AuthService) {}
+
   ngOnInit() {
     this.home = { icon: "pi pi-home", routerLink: "/" };
     this.items = MENU_ITEMS;
@@ -46,5 +49,9 @@ export class AdminLayoutComponent implements OnInit {
   toggleDarkMode() {
     this.checked = !this.checked;
     toggleDarkMode();
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }
