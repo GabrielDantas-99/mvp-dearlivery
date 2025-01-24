@@ -33,7 +33,7 @@ import { NgIf } from "@angular/common";
 })
 export class StoreLayoutComponent {
   categories: Category[] = null;
-  drawerVisible: boolean = false;
+  drawerVisible: boolean = true;
   authDialogVisible: boolean = false;
 
   constructor(
@@ -44,7 +44,7 @@ export class StoreLayoutComponent {
     this.categoryService.findAll().subscribe((res) => (this.categories = res));
   }
 
-  toggleDrawer(e?) {
+  toggleDrawer() {
     this.drawerVisible = !this.drawerVisible;
   }
 

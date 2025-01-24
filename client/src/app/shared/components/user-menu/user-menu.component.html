@@ -1,0 +1,97 @@
+<div class="card p-4">
+  <!-- variant="text" -->
+  <p-button
+    dismissable
+    variant="text"
+    (click)="usermenu.toggle($event)"
+    styleClass="min-w-48 w-full flex gap-2 items-center justify-between"
+  >
+    <div class="flex items-center gap-2">
+      @if (user.imgUrl) {
+      <p-avatar
+        class="min-w-12 min-h-12"
+        [image]="user.imgUrl"
+        size="large"
+        shape="circle"
+      />
+      } @else {
+      <p-avatar
+        class="bg-[#dee9fc] text-[#1a2551] min-w-12 min-h-12"
+        size="large"
+        shape="circle"
+        [label]="user.name.slice(0, 1)"
+      />
+      }
+      <div class="leading-4 text-start">
+        <p class="font-bold truncate w-[150px]">{{ user.name }}</p>
+        <p class="truncate text-sm">{{ user.email }}</p>
+      </div>
+    </div>
+    <i class="pi pi-code rotate-90 opacity-75"></i>
+  </p-button>
+
+  <p-popover dismissable styleClass="w-[255px]" #usermenu>
+    <div class="flex flex-col gap-4">
+      <div>
+        <div
+          class="flex items-center justify-between gap-2 border-b border-neutral-300 py-2"
+        >
+          <div class="flex items-center gap-2 w-3/4">
+            @if (user.imgUrl) {
+            <p-avatar
+              class="min-w-12 min-h-12"
+              [image]="user.imgUrl"
+              size="large"
+              shape="circle"
+            />
+            } @else {
+            <p-avatar
+              class="bg-[#dee9fc] text-[#1a2551] min-w-12 min-h-12"
+              size="large"
+              shape="circle"
+              [label]="user.name.slice(0, 1)"
+            />
+            }
+            <div class="leading-4 text-start">
+              <p class="font-bold truncate w-[156px]">
+                {{ getUserName(user.name) }}
+              </p>
+              <p class="truncate text-sm">{{ user.email }}</p>
+            </div>
+          </div>
+          <p-toggleswitch (click)="toggleTheme()">
+            <ng-template #handle let-checked="checked">
+              <i
+                [ngClass]="['!text-xs', 'pi', checked ? 'pi-moon' : 'pi-sun']"
+              ></i>
+            </ng-template>
+          </p-toggleswitch>
+        </div>
+        <ul>
+          <li class="user-menu-link my-2">
+            <i class="pi pi-crown"></i>
+            <span class="font-medium">Obter plano PRO</span>
+          </li>
+          <ul class="border-t border-b border-neutral-300 py-2">
+            <li class="user-menu-link">
+              <i class="pi pi-verified"></i>
+              <span class="font-medium">Conta</span>
+            </li>
+            <li class="user-menu-link">
+              <i class="pi pi-credit-card"></i>
+              <span class="font-medium">Pagamentos</span>
+            </li>
+            <li class="user-menu-link">
+              <i class="pi pi-bell"></i>
+              <span class="font-medium">Notificações</span>
+            </li>
+          </ul>
+          <li (click)="logout()" class="logout-menu-link mt-2">
+            <i class="pi pi-sign-out"></i>
+            <span class="font-medium">Desconectar-se</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </p-popover>
+</div>

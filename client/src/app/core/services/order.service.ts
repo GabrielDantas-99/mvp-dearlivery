@@ -47,7 +47,6 @@ export class OrderService {
     }
     cart.total = this.calculateTotal(cart.items);
     this.saveCart(cart);
-    console.log(this.getOrder());
   }
 
   decrementFromCart(product: Product) {

@@ -4,15 +4,15 @@ import { MenuModule } from "primeng/menu";
 import { BadgeModule } from "primeng/badge";
 import { RippleModule } from "primeng/ripple";
 import { AvatarModule } from "primeng/avatar";
-import { NgClass, NgIf } from "@angular/common";
+import { NgIf } from "@angular/common";
 import { ButtonModule } from "primeng/button";
 import { toggleDarkMode } from "../../../../app.component";
-import { ToggleSwitch } from "primeng/toggleswitch";
 import { FormsModule } from "@angular/forms";
 import { BreadcrumbModule } from "primeng/breadcrumb";
 import { MENU_ITEMS } from "../../const/menu-itens";
 import { RouterLink } from "@angular/router";
 import { AuthService } from "@core/services/auth.service";
+import { UserMenuComponent } from "@shared/components/user-menu/user-menu.component";
 
 @Component({
   selector: "app-admin-layout",
@@ -24,10 +24,9 @@ import { AuthService } from "@core/services/auth.service";
     AvatarModule,
     NgIf,
     FormsModule,
-    ToggleSwitch,
-    NgClass,
     BreadcrumbModule,
     RouterLink,
+    UserMenuComponent,
   ],
   templateUrl: "./admin-layout.component.html",
   styleUrl: "./admin-layout.component.css",
@@ -46,8 +45,11 @@ export class AdminLayoutComponent implements OnInit {
     this.items = MENU_ITEMS;
   }
 
+  get user() {
+    return this.authService.user;
+  }
+
   toggleDarkMode() {
-    this.checked = !this.checked;
     toggleDarkMode();
   }
 

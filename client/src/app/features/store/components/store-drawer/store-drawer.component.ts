@@ -8,30 +8,27 @@ import {
 import { DrawerModule } from "primeng/drawer";
 import { ButtonModule } from "primeng/button";
 import { Ripple } from "primeng/ripple";
-import { AvatarModule } from "primeng/avatar";
 import { StyleClass } from "primeng/styleclass";
 import { Drawer } from "primeng/drawer";
 import { CategoryService } from "@core/services/category.service";
 import { Category } from "@core/interfaces/category";
-import { NgClass, NgFor, NgIf } from "@angular/common";
+import { NgFor, NgIf } from "@angular/common";
 import { Router, RouterLink } from "@angular/router";
-import { ToggleSwitch } from "primeng/toggleswitch";
 import { toggleDarkMode } from "app/app.component";
 import { AuthService } from "@core/services/auth.service";
+import { UserMenuComponent } from "../../../../shared/components/user-menu/user-menu.component";
 
 @Component({
   selector: "app-store-drawer",
   imports: [
-    ToggleSwitch,
     DrawerModule,
     ButtonModule,
-    AvatarModule,
     RouterLink,
     StyleClass,
-    NgClass,
     Ripple,
     NgFor,
     NgIf,
+    UserMenuComponent,
   ],
   providers: [CategoryService],
   templateUrl: "./store-drawer.component.html",
@@ -54,8 +51,8 @@ export class StoreDrawerComponent {
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  closeCallback(e): void {
-    this.drawerRef.close(e);
+  closeCallback(): void {
+    this.drawerVisible = false;
     this.toggleDrawer.emit();
   }
 

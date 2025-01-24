@@ -21,7 +21,6 @@ export class AuthService {
     return this.http.post(`${api.baseUrl}/api/v1/auth/login`, credentials).pipe(
       first(),
       tap((res: LoginResponse) => {
-        console.log(res);
         this.user = { name: res.name, email: res.email, role: res.role };
         this.token = res.access_token;
       })
@@ -32,7 +31,6 @@ export class AuthService {
     return this.http.post(`${api.baseUrl}/api/v1/auth/register`, value).pipe(
       first(),
       tap((res) => {
-        console.log(res);
         this.user = res;
       })
     );
