@@ -30,7 +30,6 @@ import { Router } from "@angular/router";
   styleUrl: "./my-cart.component.css",
 })
 export class MyCartComponent {
-  items: OrderItem[] = [];
   order: Order = {
     items: [],
     moment: null,
@@ -38,10 +37,6 @@ export class MyCartComponent {
     total: null,
     orderStatus: null,
   };
-
-  quantitiesPerItem = [];
-
-  value = 0;
 
   constructor(private orderService: OrderService, private router: Router) {
     this.order = this.orderService.getCart();
