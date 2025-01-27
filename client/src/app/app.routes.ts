@@ -6,6 +6,7 @@ import { StoreCatalogComponent } from "@features/store/pages/store-catalog/store
 import { MyCartComponent } from "@features/store/pages/my-cart/my-cart.component";
 import { RegisterComponent } from "@features/auth/pages/register/register.component";
 import { authGuard } from "@core/guards/auth.guard";
+import { OrderSuccessComponent } from "@features/store/pages/order-success/order-success.component";
 
 export const routes: Routes = [
   {
@@ -43,6 +44,12 @@ export const routes: Routes = [
   {
     path: "my-cart",
     component: MyCartComponent,
+    canActivate: [authGuard],
+    data: { roles: ["COSTUMER"] },
+  },
+  {
+    path: "order-success",
+    component: OrderSuccessComponent,
     canActivate: [authGuard],
     data: { roles: ["COSTUMER"] },
   },

@@ -1,12 +1,12 @@
 package com.delivery.api.config;
 
-import static com.delivery.api.entities.enums.OrderStatus.CANCELED;
-import static com.delivery.api.entities.enums.OrderStatus.DELIVERED;
-import static com.delivery.api.entities.enums.OrderStatus.PAID;
-import static com.delivery.api.entities.enums.OrderStatus.SHIPPED;
-import static com.delivery.api.entities.enums.OrderStatus.WAITING_PAYMENT;
-import static com.delivery.api.entities.enums.Role.ADMIN;
-import static com.delivery.api.entities.enums.Role.COSTUMER;
+import static com.delivery.api.domain.enums.OrderStatus.CANCELED;
+import static com.delivery.api.domain.enums.OrderStatus.DELIVERED;
+import static com.delivery.api.domain.enums.OrderStatus.PAID;
+import static com.delivery.api.domain.enums.OrderStatus.SHIPPED;
+import static com.delivery.api.domain.enums.OrderStatus.WAITING_PAYMENT;
+import static com.delivery.api.domain.enums.Role.ADMIN;
+import static com.delivery.api.domain.enums.Role.COSTUMER;
 
 import java.time.Instant;
 import java.util.Arrays;
@@ -16,12 +16,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.delivery.api.entities.domain.Category;
-import com.delivery.api.entities.domain.Order;
-import com.delivery.api.entities.domain.OrderItem;
-import com.delivery.api.entities.domain.Payment;
-import com.delivery.api.entities.domain.Product;
-import com.delivery.api.entities.domain.User;
+import com.delivery.api.domain.entities.Category;
+import com.delivery.api.domain.entities.Order;
+import com.delivery.api.domain.entities.OrderItem;
+import com.delivery.api.domain.entities.Payment;
+import com.delivery.api.domain.entities.Product;
+import com.delivery.api.domain.entities.User;
 import com.delivery.api.repositories.CategoryRepository;
 import com.delivery.api.repositories.OrderItemRepository;
 import com.delivery.api.repositories.OrderRepository;
@@ -110,7 +110,7 @@ public class TestConfig implements CommandLineRunner {
                                 ADMIN);
                 User u2 = new User(
                                 null,
-                                "Leonardo Enrico Nelson da Cunha",
+                                "Alex Enrico Nelson da Cunha",
                                 "alex@gmail.com",
                                 "(63) 98484-0855",
                                 "650.020.239-24",

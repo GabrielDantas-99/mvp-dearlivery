@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { OrderItem } from "@core/interfaces/order-item";
 import { MenuModule } from "primeng/menu";
 import { Product } from "@core/interfaces/product";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-my-cart",
@@ -29,6 +30,7 @@ import { Product } from "@core/interfaces/product";
   styleUrl: "./my-cart.component.css",
 })
 export class MyCartComponent {
+  items: OrderItem[] = [];
   order: Order = {
     items: [],
     moment: null,
@@ -41,28 +43,19 @@ export class MyCartComponent {
 
   value = 0;
 
-  constructor(private orderService: OrderService) {
+  constructor(private orderService: OrderService, private router: Router) {
     this.order = this.orderService.getCart();
-    // this.order.items.forEach((item) => {
-    //   this.quantitiesPerItem.push(item.quantity);
-    // });
   }
 
-  saveOrder() {
-    let items: OrderItem[] = [];
-    this.order.items.forEach((item, i) => {
-      items.push({
-        ...item,
-        quantity: this.quantitiesPerItem[i],
-        subTotal: this.quantitiesPerItem[i] * item.price,
-      });
+  finalizeOrder() {
+    this.orderService.create().subscribe({
+      next: (res) => {
+        this.router.navigate(["order-success"]);
+      },
+      error: (err) => {
+        console.log(err);
+      },
     });
-    items.map((i) => (this.order.total += i.subTotal));
-    this.order = {
-      ...this.order,
-      items: items,
-    };
-    this.orderService.saveCart(this.order);
   }
 
   incriaseItem(product: Product) {

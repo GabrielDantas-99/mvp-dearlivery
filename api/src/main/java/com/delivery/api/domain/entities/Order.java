@@ -1,11 +1,11 @@
-package com.delivery.api.entities.domain;
+package com.delivery.api.domain.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.delivery.api.entities.enums.OrderStatus;
+import com.delivery.api.domain.enums.OrderStatus;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;

@@ -7,7 +7,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
-import com.delivery.api.entities.domain.Category;
+import com.delivery.api.domain.entities.Category;
 import com.delivery.api.repositories.CategoryRepository;
 import com.delivery.api.services.exceptions.DatabaseException;
 import com.delivery.api.services.exceptions.ResourceNotFoundException;

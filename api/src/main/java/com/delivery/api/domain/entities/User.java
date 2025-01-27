@@ -1,4 +1,4 @@
-package com.delivery.api.entities.domain;
+package com.delivery.api.domain.entities;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -7,7 +7,7 @@ import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.delivery.api.entities.enums.Role;
+import com.delivery.api.domain.enums.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;

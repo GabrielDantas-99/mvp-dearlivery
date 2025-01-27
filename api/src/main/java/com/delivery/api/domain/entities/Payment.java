@@ -1,4 +1,4 @@
-package com.delivery.api.entities.domain;
+package com.delivery.api.domain.entities;
 
 import java.io.Serializable;
 import java.time.Instant;

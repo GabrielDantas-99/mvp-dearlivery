@@ -7,7 +7,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
-import com.delivery.api.entities.domain.User;
+import com.delivery.api.domain.entities.User;
 import com.delivery.api.repositories.UserRepository;
 import com.delivery.api.services.exceptions.DatabaseException;
 import com.delivery.api.services.exceptions.ResourceNotFoundException;
@@ -58,6 +58,11 @@ public class UserService {
     entity.setName(obj.getName());
     entity.setEmail(obj.getEmail());
     entity.setPhone(obj.getPhone());
+  }
+
+  public User findByEmail(String email) {
+    Optional<User> obj = userRepository.findByEmail(email);
+    return obj.orElseThrow(() -> new ResourceNotFoundException("User not found!"));
   }
 
 }

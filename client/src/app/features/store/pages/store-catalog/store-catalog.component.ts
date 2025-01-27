@@ -13,7 +13,7 @@ import { FormsModule } from "@angular/forms";
 import { CurrencyBrPipe } from "../../../../shared/pipes/currency-br.pipe";
 import { OrderService } from "@core/services/order.service";
 import { AuthService } from "@core/services/auth.service";
-import { AuthDialogComponent } from "@features/store/components/auth-dialog/auth-dialog.component";
+import { AuthDialogComponent } from "@features/auth/components/auth-dialog/auth-dialog.component";
 import { MessageService } from "primeng/api";
 
 @Component({

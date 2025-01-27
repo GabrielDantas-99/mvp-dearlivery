@@ -9,7 +9,7 @@ import { Category } from "@core/interfaces/category";
 import { RouterLink } from "@angular/router";
 import { PasswordModule } from "primeng/password";
 import { DividerModule } from "primeng/divider";
-import { AuthDialogComponent } from "../auth-dialog/auth-dialog.component";
+import { AuthDialogComponent } from "../../../auth/components/auth-dialog/auth-dialog.component";
 import { OrderService } from "@core/services/order.service";
 import { AuthService } from "@core/services/auth.service";
 import { NgIf } from "@angular/common";
@@ -33,7 +33,7 @@ import { NgIf } from "@angular/common";
 })
 export class StoreLayoutComponent {
   categories: Category[] = null;
-  drawerVisible: boolean = true;
+  drawerVisible: boolean = false;
   authDialogVisible: boolean = false;
 
   constructor(

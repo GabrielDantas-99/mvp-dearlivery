@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.delivery.api.entities.domain.Product;
+import com.delivery.api.domain.entities.Product;
 import com.delivery.api.services.ProductService;
 
 import lombok.RequiredArgsConstructor;

@@ -1,4 +1,4 @@
-package com.delivery.api.entities.enums;
+package com.delivery.api.domain.enums;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

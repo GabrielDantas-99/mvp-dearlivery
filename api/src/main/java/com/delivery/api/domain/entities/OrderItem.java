@@ -1,8 +1,8 @@
-package com.delivery.api.entities.domain;
+package com.delivery.api.domain.entities;
 
 import java.io.Serializable;
 
-import com.delivery.api.entities.pk.OrderItemPK;
+import com.delivery.api.domain.pk.OrderItemPK;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.EmbeddedId;
