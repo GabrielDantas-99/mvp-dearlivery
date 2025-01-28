@@ -6,11 +6,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.delivery.api.config.JwtService;
-import com.delivery.api.entities.domain.User;
-import com.delivery.api.entities.dtos.request.CostumerRegisterRequestDTO;
-import com.delivery.api.entities.dtos.request.CredentialsRequestDTO;
-import com.delivery.api.entities.dtos.response.CostumerAuthenticationResponseDTO;
-import com.delivery.api.entities.enums.Role;
+import com.delivery.api.domain.dtos.request.CostumerRegisterRequestDTO;
+import com.delivery.api.domain.dtos.request.CredentialsRequestDTO;
+import com.delivery.api.domain.dtos.response.CostumerAuthenticationResponseDTO;
+import com.delivery.api.domain.entities.User;
+import com.delivery.api.domain.enums.Role;
 import com.delivery.api.repositories.UserRepository;
 
 import lombok.RequiredArgsConstructor;

@@ -1,7 +1,10 @@
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Order } from "@core/interfaces/order";
 import { OrderItem } from "@core/interfaces/order-item";
 import { Product } from "@core/interfaces/product";
+import { environment as api } from "environments/environment.development";
+import { AuthService } from "./auth.service";
 
 @Injectable({
   providedIn: "root",
@@ -9,7 +12,29 @@ import { Product } from "@core/interfaces/product";
 export class OrderService {
   private readonly CART_KEY = "meu_carrinho";
 
-  constructor() {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
+
+  create() {
+    return this.http.post(`${api.baseUrl}/orders`, this.buildOrder());
+  }
+
+  private buildOrder() {
+    const user = this.authService.user.email;
+    const moment = new Date().toISOString();
+    const items = [];
+    this.getCart().items.forEach((i) => {
+      items.push({
+        productId: i.product.id,
+        quantity: i.quantity,
+      });
+    });
+    const order = {
+      client: user,
+      items: items,
+      moment: moment,
+    };
+    return order;
+  }
 
   saveCart(cart: Order) {
     localStorage.setItem(this.CART_KEY, JSON.stringify(cart));
@@ -47,7 +72,6 @@ export class OrderService {
     }
     cart.total = this.calculateTotal(cart.items);
     this.saveCart(cart);
-    console.log(this.getOrder());
   }
 
   decrementFromCart(product: Product) {

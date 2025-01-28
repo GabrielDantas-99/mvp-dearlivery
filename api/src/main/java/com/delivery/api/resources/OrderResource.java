@@ -10,7 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.delivery.api.entities.domain.Order;
+import com.delivery.api.domain.dtos.request.OrderRequestDTO;
+import com.delivery.api.domain.dtos.response.OrderResponseDTO;
+import com.delivery.api.domain.entities.Order;
 import com.delivery.api.services.OrderService;
 
 import lombok.RequiredArgsConstructor;
@@ -44,10 +46,10 @@ public class OrderResource {
 
   @PostMapping
   @PreAuthorize("hasAnyRole('COSTUMER')")
-  public ResponseEntity<Order> create(@RequestBody Order orderDto) {
-    Order newOrder = orderService.create(orderDto);
+  public ResponseEntity<OrderResponseDTO> create(@RequestBody OrderRequestDTO orderDto) {
+    OrderResponseDTO newOrder = orderService.create(orderDto);
     URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-        .buildAndExpand(newOrder.getId()).toUri();
+        .buildAndExpand(newOrder.id()).toUri();
     return ResponseEntity.created(uri).body(newOrder);
   }
 

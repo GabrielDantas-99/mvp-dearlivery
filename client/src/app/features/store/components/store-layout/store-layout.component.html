@@ -5,7 +5,7 @@
         icon="pi pi-bars text-xl"
         variant="text"
         styleClass="h-12 w-12"
-        (onClick)="toggleDrawer($event)"
+        (onClick)="toggleDrawer()"
       />
     </ng-template>
     <ng-template #center>
@@ -39,7 +39,7 @@
   <app-store-drawer
     [drawerVisible]="drawerVisible"
     [categories]="categories"
-    (toggleDrawer)="toggleDrawer($event)"
+    (toggleDrawer)="toggleDrawer()"
     (showAuthDialog)="showAuthDialog()"
   />
 

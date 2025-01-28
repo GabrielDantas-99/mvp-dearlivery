@@ -1,9 +1,10 @@
-package com.delivery.api.entities.enums;
+package com.delivery.api.domain.enums;
+
+import static com.delivery.api.domain.enums.Permission.*;
 
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-import static com.delivery.api.entities.enums.Permission.*;
 
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 

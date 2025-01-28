@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.delivery.api.entities.dtos.request.CostumerRegisterRequestDTO;
-import com.delivery.api.entities.dtos.request.CredentialsRequestDTO;
-import com.delivery.api.entities.dtos.response.CostumerAuthenticationResponseDTO;
+import com.delivery.api.domain.dtos.request.CostumerRegisterRequestDTO;
+import com.delivery.api.domain.dtos.request.CredentialsRequestDTO;
+import com.delivery.api.domain.dtos.response.CostumerAuthenticationResponseDTO;
 import com.delivery.api.services.AuthService;
 
 import lombok.RequiredArgsConstructor;

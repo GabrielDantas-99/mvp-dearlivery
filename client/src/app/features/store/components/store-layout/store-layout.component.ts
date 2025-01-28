@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component } from "@angular/core";
 import { Toolbar } from "primeng/toolbar";
 import { ButtonModule } from "primeng/button";
 import { InputTextModule } from "primeng/inputtext";
@@ -9,7 +9,7 @@ import { Category } from "@core/interfaces/category";
 import { RouterLink } from "@angular/router";
 import { PasswordModule } from "primeng/password";
 import { DividerModule } from "primeng/divider";
-import { AuthDialogComponent } from "../auth-dialog/auth-dialog.component";
+import { AuthDialogComponent } from "@features/auth/components/auth-dialog/auth-dialog.component";
 import { OrderService } from "@core/services/order.service";
 import { AuthService } from "@core/services/auth.service";
 import { NgIf } from "@angular/common";
@@ -44,7 +44,7 @@ export class StoreLayoutComponent {
     this.categoryService.findAll().subscribe((res) => (this.categories = res));
   }
 
-  toggleDrawer(e?) {
+  toggleDrawer() {
     this.drawerVisible = !this.drawerVisible;
   }
 

@@ -211,7 +211,6 @@ export class ProductFormComponent {
           detail:
             "Este produto possui pedidos vinculados e não pode ser deletado!",
         });
-        console.log(err);
       },
     });
   }

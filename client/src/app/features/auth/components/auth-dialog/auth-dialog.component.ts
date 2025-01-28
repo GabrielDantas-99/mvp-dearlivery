@@ -78,7 +78,7 @@ export class AuthDialogComponent {
         }
         this.toast.add({
           severity: "success",
-          summary: "Bem-vindo(a), novamente!",
+          detail: "Bem-vindo(a), novamente!",
         });
       },
       error: (err) => {

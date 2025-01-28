@@ -1,9 +1,9 @@
-package com.delivery.api.entities.pk;
+package com.delivery.api.domain.pk;
 
 import java.io.Serializable;
 
-import com.delivery.api.entities.domain.Order;
-import com.delivery.api.entities.domain.Product;
+import com.delivery.api.domain.entities.Order;
+import com.delivery.api.domain.entities.Product;
 
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.JoinColumn;

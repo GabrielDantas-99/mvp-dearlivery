@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.delivery.api.entities.domain.Category;
+import com.delivery.api.domain.entities.Category;
 import com.delivery.api.services.CategoryService;
 
 import lombok.RequiredArgsConstructor;

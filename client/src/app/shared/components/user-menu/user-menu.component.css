@@ -1,0 +1,15 @@
+.user-menu {
+  @apply flex items-center gap-2 py-2 px-3 cursor-pointer rounded-md transition;
+}
+
+.logout-menu-link {
+  @apply user-menu hover:bg-red-500/10 text-red-500;
+}
+
+.user-menu-link {
+  @apply user-menu hover:bg-neutral-800/5;
+}
+
+/* .menu-list {
+  @apply list-none p-0 m-0 flex flex-col;
+} */
