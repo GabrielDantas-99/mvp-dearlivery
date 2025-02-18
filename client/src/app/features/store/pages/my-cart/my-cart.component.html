@@ -1,56 +1,7 @@
 <app-store-layout>
   <div class="p-4 space-y-4 flex flex-col">
     <h1 class="text-2xl font-medium">Meu Carrinho</h1>
-    <p-panel [toggleable]="true">
-      <ng-template #header>
-        <span class="font-bold">Atenção!</span>
-      </ng-template>
-      <ng-template #icons>
-        <p-menu #menu id="config_menu" [popup]="true" />
-      </ng-template>
-      <p class="m-0 text-balance hyphens-auto">
-        Após realizar alterações em seu pedido (Aumentar ou decrementar a
-        quantidade de um produto, excluir...), clique em "Salvar Alterações"
-        para que seu pedido seja salvo.
-      </p>
-    </p-panel>
-    <p-panel>
-      <ng-template #header>
-        <h2 class="text-xl font-medium">Resumo do Pedido</h2>
-      </ng-template>
-      <div class="flex items-center justify-between">
-        <span class="text-lg">Total:</span>
-        <h3 class="text-2xl font-semibold">{{ total | currencyBr }}</h3>
-      </div>
-      <ng-template #footer>
-        <div class="flex flex-col space-y-2">
-          <p-button
-            (onClick)="saveOrder()"
-            severity="secondary"
-            class="btn-cart w-full"
-            label="Salvar Pedido"
-          />
-          <p-button
-            class="btn-cart w-full"
-            label="Finalizar Pedido ({{ order.items.length }})"
-          />
-        </div>
-      </ng-template>
-    </p-panel>
-    <div class="border border-[--my-content-border-color] p-2 rounded-md">
-      <div class="flex items-center justify-between">
-        <div class="flex items-center">
-          <p-checkbox
-            class="grid place-items-center"
-            inputId="ingredient1"
-            name="pizza"
-            value="Cheese"
-          />
-          <label for="ingredient1" class="ml-2"> Selecionar Tudo </label>
-        </div>
-        <p-button label="Excluir" />
-      </div>
-    </div>
+
     <p-panel *ngFor="let item of order.items; index as i">
       <ng-template #header>
         <div class="flex items-center justify-between w-full">
@@ -103,30 +54,46 @@
             />
             <span class="w-1/3 text-center">{{ getQuantity(i) }}</span>
             <p-button
-              (onClick)="decrementFromCart(item, i)"
+              (onClick)="decrementFromCart(item)"
               icon="pi pi-minus"
               [text]="true"
               [outlined]="false"
             />
           </div>
-          <!-- <p-inputnumber
-            [(ngModel)]="item.quantity"
-            [showButtons]="true"
-            buttonLayout="horizontal"
-            spinnerMode="horizontal"
-            inputId="horizontal"
-            (onClick)="asd($event)"
-            [inputStyle]="{ width: '2.5rem' }"
-          >
-            <ng-template #incrementbuttonicon>
-              <span class="pi pi-plus"></span>
-            </ng-template>
-            <ng-template #decrementbuttonicon>
-              <span class="pi pi-minus"></span>
-            </ng-template>
-          </p-inputnumber> -->
         </div>
       </div>
+    </p-panel>
+    <div class="border border-[--my-content-border-color] p-2 rounded-md">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center">
+          <p-checkbox
+            class="grid place-items-center"
+            inputId="ingredient1"
+            name="pizza"
+            value="Cheese"
+          />
+          <label for="ingredient1" class="ml-2"> Selecionar Tudo </label>
+        </div>
+        <p-button label="Excluir" />
+      </div>
+    </div>
+    <p-panel>
+      <ng-template #header>
+        <h2 class="text-xl font-medium">Resumo do Pedido</h2>
+      </ng-template>
+      <div class="flex items-center justify-between">
+        <span class="text-lg">Total ({{ order.items.length }} itens):</span>
+        <h3 class="text-2xl font-semibold">{{ total | currencyBr }}</h3>
+      </div>
+      <ng-template #footer>
+        <div class="flex flex-col space-y-2">
+          <p-button
+            (onClick)="finalizeOrder()"
+            class="btn-full w-full"
+            label="Finalizar Pedido"
+          />
+        </div>
+      </ng-template>
     </p-panel>
   </div>
 </app-store-layout>

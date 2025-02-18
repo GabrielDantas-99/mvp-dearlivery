@@ -2,31 +2,33 @@ import {
   Component,
   EventEmitter,
   Input,
-  OnInit,
   Output,
   ViewChild,
 } from "@angular/core";
 import { DrawerModule } from "primeng/drawer";
 import { ButtonModule } from "primeng/button";
 import { Ripple } from "primeng/ripple";
-import { AvatarModule } from "primeng/avatar";
 import { StyleClass } from "primeng/styleclass";
 import { Drawer } from "primeng/drawer";
 import { CategoryService } from "@core/services/category.service";
 import { Category } from "@core/interfaces/category";
-import { NgFor } from "@angular/common";
-import { RouterLink } from "@angular/router";
+import { NgFor, NgIf } from "@angular/common";
+import { Router, RouterLink } from "@angular/router";
+import { toggleDarkMode } from "app/app.component";
+import { AuthService } from "@core/services/auth.service";
+import { UserMenuComponent } from "../../../../shared/components/user-menu/user-menu.component";
 
 @Component({
   selector: "app-store-drawer",
   imports: [
     DrawerModule,
     ButtonModule,
-    Ripple,
-    AvatarModule,
-    StyleClass,
-    NgFor,
     RouterLink,
+    StyleClass,
+    Ripple,
+    NgFor,
+    NgIf,
+    UserMenuComponent,
   ],
   providers: [CategoryService],
   templateUrl: "./store-drawer.component.html",
@@ -34,12 +36,41 @@ import { RouterLink } from "@angular/router";
 })
 export class StoreDrawerComponent {
   @ViewChild("drawerRef") drawerRef!: Drawer;
-  @Input() visible: boolean = false;
-  @Output() toggleDrawer = new EventEmitter();
+  @Input() drawerVisible: boolean = false;
   @Input() categories: Category[] = null;
+  @Output() toggleDrawer = new EventEmitter();
+  @Output() showAuthDialog = new EventEmitter();
 
-  closeCallback(e): void {
-    this.drawerRef.close(e);
+  checked: boolean = false;
+
+  credentials: any = {
+    user: null,
+    password: null,
+  };
+  showDialog: boolean;
+
+  constructor(private authService: AuthService, private router: Router) {}
+
+  closeCallback(): void {
+    this.drawerVisible = false;
     this.toggleDrawer.emit();
+  }
+
+  toggleDarkMode() {
+    this.checked = !this.checked;
+    toggleDarkMode();
+  }
+
+  _showAuthDialog() {
+    this.showAuthDialog.emit();
+  }
+
+  get user() {
+    return this.authService.user;
+  }
+
+  logout() {
+    this.authService.logout();
+    window.location.reload();
   }
 }

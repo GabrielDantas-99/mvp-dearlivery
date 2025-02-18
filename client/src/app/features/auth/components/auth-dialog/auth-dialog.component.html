@@ -1,0 +1,91 @@
+<p-dialog
+  [modal]="true"
+  [(visible)]="authDialogVisible"
+  [style]="{ width: '100%', maxWidth: '480px', margin: '2rem' }"
+  [draggable]="false"
+  closable="false"
+  [resizable]="false"
+>
+  <ng-template #header>
+    <div class="flex items-center justify-between w-full">
+      <h1 class="text-2xl font-semibold">Acessar</h1>
+      <p-button
+        styleClass="h-12 w-12 -mr-4"
+        (onClick)="_closeDialog()"
+        icon="pi pi-times"
+        variant="text"
+      />
+    </div>
+  </ng-template>
+  <p-message
+    styleClass="mb-4 mt-1 leading-5"
+    *ngIf="showContinueWithLogin"
+    closable
+    >Realize o login para continuar com sua compra.</p-message
+  >
+  <div class="flex overflow-hidden">
+    <div class="min-w-full transition ease-in-out duration-500">
+      <span class="p-text-secondary block leading-5 hyphens-auto"
+        >Preencha os campos abaixo corretamente para realizar o login.</span
+      >
+      <form
+        [formGroup]="loginForm"
+        (ngSubmit)="login()"
+        class="mt-4 flex flex-col space-y-3"
+      >
+        <div class="flex flex-col">
+          <label for="username" class="font-semibold w-24">Usuário</label>
+          <input
+            formControlName="user"
+            pInputText
+            id="username"
+            class="flex-auto"
+            autocomplete="off"
+            required
+          />
+        </div>
+        <div class="flex flex-col mt-3">
+          <label for="password" class="text-primary-50 font-semibold">
+            Senha
+          </label>
+          <p-password
+            id="password"
+            formControlName="password"
+            class="flex-auto w-full"
+            type="password"
+            feedback="false"
+            [toggleMask]="true"
+            required
+          />
+          <div class="text-right mt-2">
+            <a
+              class="opacity-50 hover:opacity-100 hover:underline transition ease-in-out w-fit"
+              routerLink="forget-password"
+              >Esqueceu a senha?</a
+            >
+          </div>
+        </div>
+        <p-button
+          class="btn-full mt-4"
+          label="Entrar"
+          type="submit"
+          [disabled]="!loginForm.valid"
+        />
+      </form>
+      <p-divider align="center">
+        <span class="opacity-50">Ou</span>
+      </p-divider>
+      <p-button
+        class="btn-full mt-4"
+        label="Cadastre-se"
+        severity="secondary"
+        [routerLink]="['register']"
+      />
+    </div>
+  </div>
+</p-dialog>
+<p-toast
+  [breakpoints]="{
+    '920px': { width: '90%', right: '0', left: '0', margin: '0 auto' }
+  }"
+/>

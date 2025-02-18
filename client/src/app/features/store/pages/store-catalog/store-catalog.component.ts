@@ -12,6 +12,9 @@ import { Rating } from "primeng/rating";
 import { FormsModule } from "@angular/forms";
 import { CurrencyBrPipe } from "../../../../shared/pipes/currency-br.pipe";
 import { OrderService } from "@core/services/order.service";
+import { AuthService } from "@core/services/auth.service";
+import { AuthDialogComponent } from "@features/auth/components/auth-dialog/auth-dialog.component";
+import { MessageService } from "primeng/api";
 
 @Component({
   selector: "app-store-catalog",
@@ -24,7 +27,9 @@ import { OrderService } from "@core/services/order.service";
     Chip,
     Rating,
     CurrencyBrPipe,
+    AuthDialogComponent,
   ],
+  providers: [MessageService],
   templateUrl: "./store-catalog.component.html",
   styleUrl: "./store-catalog.component.css",
 })
@@ -33,12 +38,13 @@ export class StoreCatalogComponent {
   products: Product[] = null;
   activeCategory: number = 0;
   rating: number[] = [];
-  Math: Math;
+  authDialogVisible: boolean = false;
 
   constructor(
     private categoryService: CategoryService,
     private productService: ProductService,
-    private orderService: OrderService
+    private orderService: OrderService,
+    private authService: AuthService
   ) {
     this.categoryService.findAll().subscribe((res) => (this.categories = res));
     this.productService.findAll().subscribe((res) => {
@@ -58,6 +64,14 @@ export class StoreCatalogComponent {
   }
 
   addToCart(product: Product) {
+    if (!this.authService.user) {
+      this.authDialogVisible = true;
+      return;
+    }
     this.orderService.addToCart(product);
+  }
+
+  closeDialog() {
+    this.authDialogVisible = false;
   }
 }

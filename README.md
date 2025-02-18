@@ -1,4 +1,4 @@
-# REST API with Spring Boot and Angular
+![Captura de tela 2025-02-18 - 19 22 27](https://github.com/user-attachments/assets/0ea8ab03-02c9-48fb-ab82-661f2befe07f)# REST API with Spring Boot and Angular
 
 ![Build](https://github.com/loiane/crud-angular-spring/actions/workflows/build.yml/badge.svg?branch=main)
 
@@ -64,45 +64,53 @@ This app is to showcase, especially for beginners, what a basic CRUD API that's 
 
 ### Store:
 
-<!-- [&::-webkit-scrollbar]:hidden -->
-<div style="display: flex;align-items: center;gap: 0.5rem;"
->
-<div style="text-align: center; width: 100%">
-  <h6>Catalog</h6>
-  <img style="width: 300px" src="./docs/store-catalog.png" alt="Main Page" width="100%">
-</div>
-<div style="text-align: center; width: 100%">
-  <h6>User Drawer</h6>
-  <img style="width: 300px" src="./docs/user-drawer.png" alt="Main Page" width="100%">
-</div>
-<div style="text-align: center; width: 100%">
-  <h6>My cart</h6>
-  <img style="width: 300px" src="./docs/my-cart.png" alt="My cart Page" width="100%">
-</div>
-</div>
+<table>
+  <thead>
+    <th>
+      Catalog
+    </th>
+    <th>
+      User Drawer
+    </th>
+    <th>
+      My cart
+    </th>
+    <th>
+      Login Modal
+    </th>
+  </thead>
+  <tbody>
+    <td><img style="width: 300px" src="./docs/store-catalog.png" alt="Main Page" width="100%"></td>
+    <td><img style="width: 300px" src="./docs/user-drawer.png" alt="User Drawer" width="100%"></td>
+    <td><img style="width: 300px" src="./docs/my-cart.png" alt="My cart" width="100%"></td>
+    <td><img style="width: 300px" src="./docs/login-modal.png" alt="Login Modal" width="100%"></td>
+  </tbody>
+</table>
 
 ### Admin:
 
-<div style="display: flex;flex-direction:column;align-items: center;gap: 0.5rem;"
->
-<div style="text-align: center; width: 100%">
-  <h6>Overview</h6>
-  <img style="width: 600px; border: 1px solid #e2e8f0" src="./docs/admin-overview.png" alt="Overview Page" width="100%">
-</div>
-<div style="text-align: center; width: 100%">
-  <h6>Overview Dark Mode</h6>
-  <img style="width: 600px; border: 1px solid #e2e8f0" src="./docs/dark-mode.png" alt="Dark mode Overview Page" width="100%">
-</div>
-<div style="text-align: center; width: 100%">
-  <h6>Product List</h6>
-  <img style="width: 600px; border: 1px solid #e2e8f0" src="./docs/product-list.png" alt="Product List Page" width="100%">
-</div>
-<div style="text-align: center; width: 100%">
-  <h6>Product Form</h6>
-  <img style="width: 600px; border: 1px solid #e2e8f0" src="./docs/product-form.png" alt="Product Form Page" width="100%">
-</div>
-
-</div>
+<table>
+  <thead>
+    <th>
+      Overview
+    </th>
+    <th>
+      Overview Dark Mode
+    </th>
+    <th>
+      Product List
+    </th>
+    <th>
+      Product Form
+    </th>
+  </thead>
+  <tbody>
+    <td><img style="width: 600px; border: 1px solid #e2e8f0" src="./docs/admin-overview.png" alt="Overview Page" width="100%"></td>
+    <td> <img style="width: 600px; border: 1px solid #e2e8f0" src="./docs/dark-mode.png" alt="Dark mode Overview Page" width="100%"></td>
+    <td><img style="width: 600px; border: 1px solid #e2e8f0" src="./docs/product-list.png" alt="Product List Page" width="100%"></td>
+    <td><img style="width: 600px; border: 1px solid #e2e8f0" src="./docs/product-form.png" alt="Product Form Page" width="100%"></td>
+  </tbody>
+</table>
 
 ## ❗️Executing the code locally
 
