@@ -1,4 +1,4 @@
-![Captura de tela 2025-02-18 - 19 22 27](https://github.com/user-attachments/assets/0ea8ab03-02c9-48fb-ab82-661f2befe07f)# REST API with Spring Boot and Angular
+# REST API with Spring Boot and Angular
 
 ![Build](https://github.com/loiane/crud-angular-spring/actions/workflows/build.yml/badge.svg?branch=main)
 
